@@ -10,4 +10,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://sonserim.me/sitemap.xml
+Sitemap: https://sonserim.me.kr/sitemap.xml

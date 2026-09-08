@@ -3,9 +3,9 @@
 > GEO와 AI Search를 실제 질문·검색 환경에서 측정하고 개선하는 포트폴리오입니다.
 
 ## Core pages
-- https://sonserim.me/ — About, What is Good GEO, GEO measurement framework, project summaries
-- https://sonserim.me/project-01.html — 여행상품 페이지 GEO 개선 실험
-- https://sonserim.me/project-02.html — Can AI Find Me? Portfolio GEO Experiment
+- https://sonserim.me.kr/ — About, What is Good GEO, GEO measurement framework, project summaries
+- https://sonserim.me.kr/project-01.html — 여행상품 페이지 GEO 개선 실험
+- https://sonserim.me.kr/project-02.html — Can AI Find Me? Portfolio GEO Experiment
 
 ## Key definition
 좋은 GEO는 AI에게 많이 언급되는 것이 아니라, 사용자의 질문에서 적절한 선택지로 등장하는 상태입니다.
