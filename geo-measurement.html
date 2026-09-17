@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GEO 측정 방법 | AI Search 실험·평가 프레임워크 — 손세림</title>
+  <meta name="description" content="GEO 성과를 고정 Query Set, 반복 실행, 조건 분해, Ground Truth 대조, 개선 전후 재측정으로 평가하는 방법을 정리합니다. Visibility·Recommendation·Citation·Absorption·Business Impact를 분리해 측정합니다.">
+  <meta name="author" content="손세림">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="bingbot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#f7f7f5">
+  <link rel="canonical" href="https://sonserim.me.kr/geo-measurement.html">
+  <link rel="author" href="https://sonserim.me.kr/about.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="GEO 측정 방법 | AI Search 실험·평가 프레임워크 — 손세림">
+  <meta property="og:description" content="GEO 성과를 고정 Query Set, 반복 실행, 조건 분해, Ground Truth 대조, 개선 전후 재측정으로 평가하는 방법을 정리합니다. Visibility·Recommendation·Citation·Absorption·Business Impact를 분리해 측정합니다.">
+  <meta property="og:url" content="https://sonserim.me.kr/geo-measurement.html">
+  <meta property="og:image" content="https://sonserim.me.kr/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GEO 측정 방법 | AI Search 실험·평가 프레임워크 — 손세림">
+  <meta name="twitter:description" content="GEO 성과를 고정 Query Set, 반복 실행, 조건 분해, Ground Truth 대조, 개선 전후 재측정으로 평가하는 방법을 정리합니다. Visibility·Recommendation·Citation·Absorption·Business Impact를 분리해 측정합니다.">
+  <meta name="twitter:image" content="https://sonserim.me.kr/assets/og-image.png">
+  <script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {"@type":"Article","@id":"https://sonserim.me.kr/geo-measurement.html#article","headline":"GEO 성과를 어떻게 측정할까?","description":"고정 Query Set, 반복 실행, 조건 분해, Ground Truth 검증, 재측정을 통해 GEO 성과를 비교하는 손세림의 실험 방법.","url":"https://sonserim.me.kr/geo-measurement.html","inLanguage":"ko-KR","author":{"@id":"https://sonserim.me.kr/about.html#person"},"datePublished":"2026-09-08","dateModified":"2026-09-17","keywords":["GEO 측정","AI Search 측정","Generative Engine Optimization","Visibility","Citation","AI 검색 실험"]},
+  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Portfolio","item":"https://sonserim.me.kr/"},{"@type":"ListItem","position":2,"name":"GEO Measurement","item":"https://sonserim.me.kr/geo-measurement.html"}]}
+ ]
+}
+</script>
+</head>
+<body class="detail-page content-page"><header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-orb" aria-hidden="true"></span><span>GEO / AI Search</span></a><a class="back-link" href="/">← Portfolio</a></div></header><main>
+<section class="detail-hero article-hero"><div class="section-inner"><div class="section-kicker">HOW I MEASURE GEO</div><h1 class="display-md">GEO 성과를<br>어떻게 측정할까?</h1><p class="lead">같은 질문을 반복하고, 복합 조건을 단계적으로 분해해 어디서 발견·이해·추천이 달라지는지 확인합니다. 결과는 추정하지 않고 같은 기준으로 다시 측정합니다.</p><p class="date-meta">Repeat × Decompose × Compare · Updated 2026.09.17</p></div></section>
+<article class="detail-body article-body">
+<section class="detail-block"><h2>실험의 기본 구조</h2><div class="process-row"><span>01<br><strong>Query Set 고정</strong></span><b>→</b><span>02<br><strong>반복 실행</strong></span><b>→</b><span>03<br><strong>조건 분해</strong></span><b>→</b><span>04<br><strong>Ground Truth 검증</strong></span><b>→</b><span>05<br><strong>Re-test</strong></span></div></section>
+<section class="detail-block"><h2>무엇을 기록하는가</h2><div class="metric-table-wrap"><table class="metric-table"><thead><tr><th>지표</th><th>확인 질문</th><th>기록 예시</th></tr></thead><tbody><tr><td><strong>Visibility</strong></td><td>AI 답변에 등장했는가?</td><td>고정 Query 중 등장 횟수 / 전체 실행 횟수</td></tr><tr><td><strong>Recommendation</strong></td><td>추천 후보에 포함됐는가?</td><td>추천 리스트 포함 횟수</td></tr><tr><td><strong>Citation</strong></td><td>사이트가 근거로 연결됐는가?</td><td>출처·링크 인용 여부</td></tr><tr><td><strong>Absorption</strong></td><td>핵심 조건을 정확히 읽었는가?</td><td>날짜·가격·일정·예약 상태 조건별 일치 여부</td></tr><tr><td><strong>Business Impact</strong></td><td>실제 행동으로 이어졌는가?</td><td>AI referral, 방문, 문의, 전환</td></tr></tbody></table></div></section>
+<section class="detail-block"><h2>왜 질문을 분해하는가</h2><div class="summary-box"><p><strong>복합 질문 하나만 보면 ‘왜 실패했는지’를 알기 어렵기 때문입니다.</strong></p><p>예를 들어 날짜 + 가격 조건에서는 상품이 발견되지만 방문 장소나 자유시간 조건을 추가했을 때 누락된다면, 문제 지점을 더 좁힐 수 있습니다. 그래서 동일한 핵심 질문을 반복하면서 조건을 단계적으로 추가하거나 분리합니다.</p></div></section>
+<section class="detail-block"><h2>검증 원칙</h2><ul class="plain-list"><li>같은 Query Set과 평가 기준을 사용합니다.</li><li>실제 판매 페이지나 원문을 Ground Truth로 확인합니다.</li><li>재측정이 끝나지 않은 값은 임의의 숫자로 채우지 않습니다.</li><li>플랫폼, 날짜, 실행 횟수를 함께 기록합니다.</li><li>LLM 응답 변동성과 검색 반영 시점의 차이는 한계로 명시합니다.</li></ul></section>
+<section class="detail-block"><h2>이 프레임워크를 적용한 사례</h2><div class="related-grid"><a class="related-card" href="/project-01.html"><span>PROJECT 01</span><h3>여행상품 페이지 GEO 개선</h3><p>상품 발견 → 조건 인식 → 추천 포함 → 재측정으로 검증합니다.</p></a><a class="related-card" href="/project-02.html"><span>PROJECT 02</span><h3>Portfolio GEO Experiment</h3><p>Discoverability → Entity Understanding → Citation을 고정 쿼리로 추적합니다.</p></a></div></section>
+<section class="detail-block sources"><h2>검색·AI 발견성 관련 공식 참고</h2><ul class="source-list"><li><a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener noreferrer">Google Search Central — AI features</a></li><li><a href="https://help.openai.com/en/articles/12627856" target="_blank" rel="noopener noreferrer">OpenAI — OAI-SearchBot and ChatGPT Search discovery</a></li><li><a href="https://www.bing.com/indexnow" target="_blank" rel="noopener noreferrer">Bing Webmaster Tools — IndexNow</a></li></ul></section>
+</article></main><script src="/assets/main.js" defer></script></body></html>
