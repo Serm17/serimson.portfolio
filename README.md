@@ -37,3 +37,7 @@ IndexNow key file: /6ff0e06ba7aceee660b6f06c3593a11f.txt
 
 ## Important
 IndexNow and sitemaps help discovery but do not guarantee ranking or AI citation. Google AI search does not require a special GEO tag. The core strategy is crawlability, clear text, consistent entity signals, useful first-party content, internal links, and repeatable measurement.
+
+
+## GEO portfolio hub
+- `/geo-portfolio.html` — non-branded “GEO 포트폴리오” discovery를 위한 핵심 허브 페이지
