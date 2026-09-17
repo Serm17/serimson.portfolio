@@ -13,4 +13,3 @@ $body = @{
 } | ConvertTo-Json -Depth 3
 Invoke-RestMethod -Uri "https://api.indexnow.org/indexnow" -Method Post -ContentType "application/json; charset=utf-8" -Body $body
 Write-Host "IndexNow submitted. This notifies participating engines; it does not guarantee indexing."
-
