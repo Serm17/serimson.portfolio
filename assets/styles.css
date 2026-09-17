@@ -389,6 +389,13 @@ main { padding-top: 64px; }
 @media (max-width: 900px) { .knowledge-grid { grid-template-columns: repeat(2,1fr); } .related-grid { grid-template-columns:1fr; } .baseline-strip { align-items:flex-start; flex-direction:column; gap:6px; } }
 @media (max-width: 560px) { .knowledge-grid, .knowledge-grid.five { grid-template-columns:1fr; } .summary-box, .definition-box { padding:22px; } .flow-inline, .process-row { display:grid; grid-template-columns:1fr; } .flow-inline b, .process-row b { transform:rotate(90deg); justify-self:center; } }
 
+/* GEO portfolio keyword hub */
+.hero-intro { max-width: 720px; margin: -26px 0 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+.hero-link { margin-top: 18px; }
+.geo-portfolio-hero .display-md { max-width: 950px; }
+.geo-hub-grid { grid-template-columns: repeat(2,1fr); }
+@media (max-width: 900px) { .hero-intro { margin-top: -10px; max-width: 92%; } .geo-hub-grid { grid-template-columns:1fr; } }
+
 /* =========================================================
    Typography scale-up — 2026-09-08
    Improves readability on desktop without changing the visual system.
