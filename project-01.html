@@ -1,1 +1,47 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>여행상품 페이지 GEO 개선 실험 | 손세림 GEO Portfolio</title><meta name="description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고 개선 우선순위를 설계한 GEO 실험입니다."><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://sonserim.me.kr/project-01.html"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/styles.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","@id":"https://sonserim.me.kr/project-01.html#project","name":"여행상품 페이지 GEO 개선 실험","creator":{"@type":"Person","name":"손세림"},"about":["Generative Engine Optimization","AI Search","정보 구조","여행상품 페이지"],"url":"https://sonserim.me.kr/project-01.html"}</script></head><body class="detail-page"><header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-orb"></span><span>GEO / AI Search</span></a><a class="back-link" href="/#project-01">← Portfolio</a></div></header><main><section class="detail-hero"><div class="section-inner"><div class="section-kicker">Project 01</div><h1 class="display-md">Can AI find the right Product?</h1><p class="lead">여행상품 페이지 GEO 개선 실험 · 상품은 존재하지만 AI 추천에서 누락되는 이유를 찾다.</p></div></section><article class="detail-body"><section class="detail-block"><h2>Problem</h2><p>실험 대상 상품은 날짜·가격·일정 조건을 충족했지만 AI 추천에서 누락되었습니다. 따라서 “정보가 있는데도 AI는 왜 상품을 찾지 못했을까?”를 핵심 질문으로 두었습니다.</p><div class="browser"><div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><img src="/assets/travel-product.png" alt="실험 대상 여행상품 상세 페이지"></div></section><section class="detail-block"><h2>Finding</h2><div class="finding-grid"><article class="finding-card"><span class="num">01</span><h3>상품 Entity가 약함</h3><p>브랜드 중심 title로 개별 상품의 정체성이 약했습니다.</p></article><article class="finding-card"><span class="num">02</span><h3>핵심 조건 관계가 약함</h3><p>날짜와 가격은 존재하지만 상품과의 관계를 명확히 읽기 어려웠습니다.</p></article><article class="finding-card"><span class="num">03</span><h3>중요 정보가 분산됨</h3><p>일정·포함사항·선택관광·예약 상태가 서로 다른 영역에 흩어져 있었습니다.</p></article></div></section><section class="detail-block"><h2>Optimization Priority</h2><p>새로운 콘텐츠를 추가하기보다 기존 정보를 AI가 이해하기 쉬운 구조로 정리하는 것을 먼저 선택했습니다. 상품 Entity 명확화와 핵심 조건 구조화를 P1, Structured Data를 P2, 추가 콘텐츠 제작을 P3로 두었습니다.</p></section><section class="detail-block"><h2>Validation</h2><p>재측정이 완료되지 않은 항목은 임의 수치로 채우지 않습니다. 현재 상태 확인 → 개선안 적용 → 같은 조건으로 재실험 → 개선 전후 비교의 순서로 검증합니다. LLM 응답 변동성, 검색 반영 시점, 플랫폼별 검색 방식, 실제 구매 전환의 별도 측정 필요성은 실험의 한계로 남깁니다.</p></section></article></main><script src="/assets/main.js" defer></script></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>여행상품 GEO 개선 실험 | AI 추천 누락 원인 분석 — 손세림</title>
+  <meta name="description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고, 영향도와 구현 비용에 따라 GEO 개선 우선순위를 설계한 프로젝트입니다.">
+  <meta name="author" content="손세림">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="bingbot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#f7f7f5">
+  <link rel="canonical" href="https://sonserim.me.kr/project-01.html">
+  <link rel="author" href="https://sonserim.me.kr/about.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="여행상품 GEO 개선 실험 | AI 추천 누락 원인 분석 — 손세림">
+  <meta property="og:description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고, 영향도와 구현 비용에 따라 GEO 개선 우선순위를 설계한 프로젝트입니다.">
+  <meta property="og:url" content="https://sonserim.me.kr/project-01.html">
+  <meta property="og:image" content="https://sonserim.me.kr/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="여행상품 GEO 개선 실험 | AI 추천 누락 원인 분석 — 손세림">
+  <meta name="twitter:description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고, 영향도와 구현 비용에 따라 GEO 개선 우선순위를 설계한 프로젝트입니다.">
+  <meta name="twitter:image" content="https://sonserim.me.kr/assets/og-image.png">
+  <script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {"@type":"CreativeWork","@id":"https://sonserim.me.kr/project-01.html#project","name":"여행상품 페이지 GEO 개선 실험","headline":"여행상품 페이지 GEO 개선 실험 — AI 추천 누락 원인 분석","description":"조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고 개선 우선순위를 설계한 GEO 실험.","url":"https://sonserim.me.kr/project-01.html","inLanguage":"ko-KR","creator":{"@id":"https://sonserim.me.kr/about.html#person"},"dateCreated":"2026-09-04","dateModified":"2026-09-17","keywords":["GEO","Generative Engine Optimization","AI Search","여행상품","정보 구조","Entity","AI 추천"]},
+  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Portfolio","item":"https://sonserim.me.kr/"},{"@type":"ListItem","position":2,"name":"Project 01","item":"https://sonserim.me.kr/project-01.html"}]}
+ ]
+}
+</script>
+</head>
+<body class="detail-page"><header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-orb" aria-hidden="true"></span><span>GEO / AI Search</span></a><a class="back-link" href="/">← Portfolio</a></div></header><main>
+<section class="detail-hero"><div class="section-inner"><div class="section-kicker">Project 01 · Generative Engine Optimization</div><h1 class="display-md">여행상품 페이지<br>GEO 개선 실험</h1><p class="lead">Can AI find the right product? 조건에 맞는 상품이 실제로 존재하지만 AI 추천에서 누락되는 이유를 질문·페이지 구조·조건 인식 관점에서 분석했습니다.</p><p class="date-meta">Experiment · 2026.09 · 손세림</p></div></section>
+<article class="detail-body article-body">
+<section class="detail-block"><h2>핵심 문제</h2><div class="summary-box"><p><strong>상품은 존재했고 날짜·가격·일정 조건도 맞았지만 AI 추천에는 포함되지 않았습니다.</strong></p><p>그래서 “정보가 있는데도 AI는 왜 상품을 찾지 못했을까?”를 핵심 질문으로 두고, 콘텐츠 양보다 정보가 어떤 상품의 어떤 조건인지 명확히 연결되는지를 먼저 확인했습니다.</p></div><div class="browser"><div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><img src="/assets/travel-product.png" alt="2027년 1월 15일 출발 오사카 여행상품 상세 페이지 실험 화면" width="1821" height="892"></div></section>
+<section class="detail-block"><h2>실험 설계</h2><p><strong>같은 질문을 반복하고, 복합 조건을 단계적으로 분해했습니다.</strong> 날짜·가격 같은 기본 조건에서 시작해 장소·일정·자유시간처럼 구체적인 조건을 추가하면서 어느 단계에서 상품이 누락되는지 확인했습니다.</p><div class="process-row"><span>01<br><strong>동일 질문 반복</strong></span><b>→</b><span>02<br><strong>조건 단계별 분해</strong></span><b>→</b><span>03<br><strong>AI 답변 기록</strong></span><b>→</b><span>04<br><strong>실제 페이지 대조</strong></span></div><p><a class="inline-link" href="/geo-measurement.html">실험·측정 기준 자세히 보기</a></p></section>
+<section class="detail-block"><h2>발견한 구조적 문제</h2><div class="finding-grid"><article class="finding-card"><span class="num">01</span><h3>상품 Entity가 약함</h3><p>브랜드 중심 title로는 개별 상품의 정체성이 충분히 드러나지 않았습니다.</p><div class="code-chip mono">&lt;title&gt;노랑풍선 [여행을 가볍게]&lt;/title&gt;</div></article><article class="finding-card"><span class="num">02</span><h3>핵심 조건 관계가 약함</h3><p>날짜와 가격은 존재했지만 해당 값이 어떤 상품의 조건인지 구조적으로 명확하지 않았습니다.</p><div class="code-chip">출발 2027.01.15<br>성인 849,000원</div></article><article class="finding-card"><span class="num">03</span><h3>중요 정보가 분산됨</h3><p>일정·포함사항·선택관광·예약 상태가 서로 다른 영역에 흩어져 있었습니다.</p><div class="code-chip">일정 / 포함 / 선택 / 예약 상태</div></article></div></section>
+<section class="detail-block"><h2>GEO 개선 우선순위</h2><p>모든 항목을 한 번에 바꾸지 않고 <strong>영향도 × 기대 효과 × 구현 비용</strong>을 기준으로 우선순위를 정했습니다.</p><div class="metric-table-wrap"><table class="metric-table"><thead><tr><th>개선안</th><th>Impact</th><th>Cost</th><th>Priority</th><th>판단</th></tr></thead><tbody><tr><td>상품 Entity 명확화</td><td>HIGH</td><td>LOW</td><td>P1</td><td>title·heading 등 낮은 비용으로 상품 식별력을 높일 수 있음</td></tr><tr><td>핵심 조건 구조화</td><td>HIGH</td><td>MID</td><td>P1</td><td>날짜·가격·일정과 상품의 관계를 명확히 연결</td></tr><tr><td>Structured Data</td><td>MID</td><td>MID</td><td>P2</td><td>명시적 구조를 보조하는 역할</td></tr><tr><td>추가 콘텐츠 제작</td><td>LOW</td><td>HIGH</td><td>P3</td><td>이미 핵심 정보가 존재해 우선순위 낮음</td></tr></tbody></table></div></section>
+<section class="detail-block"><h2>Optimization Example</h2><div class="before-after wide"><span class="ba-label">BEFORE</span><div class="ba-box mono">&lt;title&gt;노랑풍선 [여행을 가볍게]&lt;/title&gt;</div><span class="ba-label">AFTER · 제안</span><div class="ba-box after mono">&lt;title&gt;2027년 1월 15일 출발 오사카 2박 3일 패키지 | 노랑풍선&lt;/title&gt;</div></div><p><strong>새 정보를 덧붙이기보다, 이미 있는 정보의 Entity와 조건 관계를 먼저 명확히 만드는 것을 우선했습니다.</strong></p></section>
+<section class="detail-block"><h2>검증 방법과 한계</h2><p>재측정이 완료되지 않은 결과를 임의 수치로 채우지 않습니다. 현재 상태 확인 → 개선안 적용 → 같은 조건으로 재실험 → 개선 전후 비교 순서로 검증합니다.</p><ul class="plain-list"><li>LLM 답변은 같은 질문에도 달라질 수 있습니다.</li><li>검색 인덱스에 개선 내용이 반영되는 시점 차이가 있습니다.</li><li>플랫폼마다 검색·Retrieval 방식이 다릅니다.</li><li>AI 추천 노출과 실제 구매 전환은 별도로 측정해야 합니다.</li></ul></section>
+<section class="detail-block"><h2>관련 프레임워크</h2><p><a class="inline-link" href="/good-geo.html">좋은 GEO란 무엇인가?</a> · <a class="inline-link" href="/geo-measurement.html">GEO 성과 측정 방법</a></p></section>
+</article></main><script src="/assets/main.js" defer></script></body></html>
