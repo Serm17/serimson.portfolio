@@ -41,3 +41,9 @@ IndexNow and sitemaps help discovery but do not guarantee ranking or AI citation
 
 ## GEO portfolio hub
 - `/geo-portfolio.html` — non-branded “GEO 포트폴리오” discovery를 위한 핵심 허브 페이지
+
+## 방문자 분석 (GA4 + Clarity)
+
+이 빌드에는 방문자 수, 클릭, 스크롤, 섹션 도달, 실제 읽은 시간을 측정할 수 있는 분석 코드가 포함되어 있습니다.
+`assets/analytics-config.js`에 GA4 Measurement ID와 Microsoft Clarity Project ID를 입력하세요.
+자세한 설정은 `ANALYTICS_SETUP.md`를 참고하세요.
