@@ -475,6 +475,16 @@ body { font-size: 17px; }
 .back-link { font-size: 14px; }
 .detail-block p { font-size: 17px; }
 
+/* Keep the five GEO criteria compact and wrap at whole words. */
+.detail-block:has(> .knowledge-grid.five) > h2 { font-size: clamp(28px, 3vw, 40px); }
+.knowledge-grid.five h3 { font-size: 16px; }
+.knowledge-grid.five p {
+  font-size: 15px;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
 @media (max-width: 900px) {
   body { font-size: 16px; }
   .nav { font-size: 15px; }
