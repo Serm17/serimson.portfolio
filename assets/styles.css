@@ -496,6 +496,34 @@ body { font-size: 17px; }
   overflow-wrap: normal;
 }
 
+/* About page: interactive career timeline. */
+.detail-block.career-section { margin: 52px 0 68px; }
+.career-section > h2 { margin-bottom: 8px; }
+.career-hint { margin: 0 0 30px; font-size: 14px !important; }
+.career-flow-scroll { overflow-x: auto; padding: 4px 0 12px; }
+.career-timeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px; min-width: 760px; }
+.career-step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; padding: 0 4px 8px; border: 0; background: transparent; color: var(--muted); cursor: pointer; text-align: center; }
+.career-step:not(:last-child)::after { content: '→'; position: absolute; top: 31px; right: -27px; color: var(--muted); font-size: 24px; font-weight: 400; }
+.career-dot { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; background: var(--blue-soft-2); color: var(--blue); font-size: 22px; font-weight: 800; transition: background .2s, color .2s, transform .2s; }
+.career-step:hover .career-dot, .career-step[aria-expanded="true"] .career-dot { background: var(--blue); color: #fff; transform: translateY(-2px); }
+.career-step:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 12px; }
+.career-name { color: var(--ink); font-size: 16px; font-weight: 700; word-break: keep-all; }
+.career-date { font-size: 12px; white-space: nowrap; }
+.career-panel { margin-top: 24px; padding: 26px 30px; border: 1px solid var(--blue-soft-2); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+.career-panel[hidden] { display: none; }
+.career-panel-date { color: var(--blue); font-size: 12px; font-weight: 800; }
+.career-panel h3 { margin: 8px 0 10px; font-size: 22px; }
+.career-panel p { margin: 0; font-size: 15px; word-break: keep-all; }
+.career-panel .career-tools { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; }
+.career-tools strong { color: var(--blue); margin-right: 10px; }
+@media (max-width: 560px) {
+  .career-timeline { min-width: 680px; gap: 20px; }
+  .career-dot { width: 72px; height: 72px; font-size: 19px; }
+  .career-step:not(:last-child)::after { top: 24px; right: -19px; }
+  .career-name { font-size: 14px; }
+  .career-panel { padding: 22px; }
+}
+
 @media (max-width: 900px) {
   body { font-size: 16px; }
   .nav { font-size: 15px; }
