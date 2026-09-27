@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>여행상품 GEO 개선 실험 | AI 추천 누락 원인 분석 — 손세림</title>
-  <meta name="description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고, 영향도와 구현 비용에 따라 GEO 개선 우선순위를 설계한 프로젝트입니다.">
+  <title>여행상품 GEO 실험 | AI False Negative·Event 식별·장소 노출 — 손세림</title>
+  <meta name="description" content="AI False Negative와 Date-to-Event 문제를 통제 실험으로 검증하고, JOP1193 장소 노출 0/20 Baseline 이후 Place Schema V0/V1 실험에서 lexical relevance와 구조화 관계 식별을 분리해 비교한 GEO 프로젝트입니다.">
   <meta name="author" content="손세림">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -16,34 +16,427 @@
   <link rel="stylesheet" href="/assets/styles.css">
   <meta property="og:type" content="article">
   <meta property="og:locale" content="ko_KR">
-  <meta property="og:title" content="여행상품 GEO 개선 실험 | AI 추천 누락 원인 분석 — 손세림">
-  <meta property="og:description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고, 영향도와 구현 비용에 따라 GEO 개선 우선순위를 설계한 프로젝트입니다.">
+  <meta property="og:title" content="여행상품 GEO 실험 | AI False Negative·Event 식별·장소 노출 — 손세림">
+  <meta property="og:description" content="실제 판매 중인 상품이 AI 추천에서 누락되는 원인을 Retrieval과 정보 구조 관점에서 분리해 검증한 GEO 프로젝트입니다.">
   <meta property="og:url" content="https://sonserim.me.kr/project-01.html">
   <meta property="og:image" content="https://sonserim.me.kr/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="여행상품 GEO 개선 실험 | AI 추천 누락 원인 분석 — 손세림">
-  <meta name="twitter:description" content="조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고, 영향도와 구현 비용에 따라 GEO 개선 우선순위를 설계한 프로젝트입니다.">
+  <meta name="twitter:title" content="여행상품 GEO 실험 | AI False Negative·Event 식별·장소 노출 — 손세림">
+  <meta name="twitter:description" content="실제 판매 중인 상품이 AI 추천에서 누락되는 원인을 Retrieval과 정보 구조 관점에서 분리해 검증한 GEO 프로젝트입니다.">
   <meta name="twitter:image" content="https://sonserim.me.kr/assets/og-image.png">
   <script type="application/ld+json">
 {
  "@context":"https://schema.org",
  "@graph":[
-  {"@type":"CreativeWork","@id":"https://sonserim.me.kr/project-01.html#project","name":"여행상품 페이지 GEO 개선 실험","headline":"여행상품 페이지 GEO 개선 실험 — AI 추천 누락 원인 분석","description":"조건에 맞는 여행상품이 AI 추천에서 누락되는 원인을 상품 Entity, 핵심 조건 관계, 정보 분산 관점에서 분석하고 개선 우선순위를 설계한 GEO 실험.","url":"https://sonserim.me.kr/project-01.html","inLanguage":"ko-KR","creator":{"@id":"https://sonserim.me.kr/about.html#person"},"dateCreated":"2026-09-04","dateModified":"2026-09-17","keywords":["GEO","Generative Engine Optimization","AI Search","여행상품","정보 구조","Entity","AI 추천"]},
-  {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Portfolio","item":"https://sonserim.me.kr/"},{"@type":"ListItem","position":2,"name":"Project 01","item":"https://sonserim.me.kr/project-01.html"}]}
+  {
+   "@type":"CreativeWork",
+   "@id":"https://sonserim.me.kr/project-01.html#project",
+   "name":"여행상품 GEO 검색 정확도 개선 실험",
+   "headline":"여행상품 GEO 실험 — AI False Negative에서 Event 식별·장소 노출까지",
+   "description":"실제 판매 중인 여행상품이 AI 추천에서 누락되는 False Negative를 발견하고, 날짜 신호와 Event 식별 구조를 통제 실험으로 검증한 뒤 장소 기반 추천 노출 Baseline을 측정한 GEO 프로젝트.",
+   "url":"https://sonserim.me.kr/project-01.html",
+   "inLanguage":"ko-KR",
+   "creator":{"@id":"https://sonserim.me.kr/about.html#person"},
+   "dateCreated":"2026-09-04",
+   "dateModified":"2026-09-27",
+   "keywords":["GEO","Generative Engine Optimization","AI Search","여행상품","Retrieval","Entity","Structured Data","TouristTrip","AI 추천"]
+  },
+  {
+   "@type":"BreadcrumbList",
+   "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Portfolio","item":"https://sonserim.me.kr/"},
+    {"@type":"ListItem","position":2,"name":"Project 01","item":"https://sonserim.me.kr/project-01.html"}
+   ]
+  }
  ]
 }
 </script>
 </head>
-<body class="detail-page"><header class="site-header"><div class="header-inner"><a class="brand" href="/"><span class="brand-orb" aria-hidden="true"></span><span>GEO / AI Search</span></a><a class="back-link" href="/geo-portfolio.html">← GEO 포트폴리오</a></div></header><main>
-<section class="detail-hero"><div class="section-inner"><div class="section-kicker">Project 01 · Generative Engine Optimization</div><h1 class="display-md">여행상품 페이지<br>GEO 개선 실험</h1><p class="lead">Can AI find the right product? 조건에 맞는 상품이 실제로 존재하지만 AI 추천에서 누락되는 이유를 질문·페이지 구조·조건 인식 관점에서 분석했습니다.</p><p class="date-meta">Experiment · 2026.09 · 손세림</p></div></section>
+<body class="detail-page">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/"><span class="brand-orb" aria-hidden="true"></span><span>GEO / AI Search</span></a>
+    <a class="back-link" href="/geo-portfolio.html">← GEO 포트폴리오</a>
+  </div>
+</header>
+
+<main>
+<section class="detail-hero">
+  <div class="section-inner">
+    <div class="section-kicker">Project 01 · Generative Engine Optimization</div>
+    <h1 class="display-md">여행상품 GEO<br>검색 정확도 개선 실험</h1>
+    <p class="lead">상품 페이지를 “더 많이 쓰는 것”보다, AI가 <strong>실제로 존재하는 상품과 출발 Event를 정확히 찾는가</strong>부터 확인했습니다. False Negative를 발견한 뒤 원인을 Retrieval 단계까지 좁히고, 통제 실험으로 날짜 신호의 한계와 구조화된 Event 식별 방식을 검증했습니다.</p>
+    <p class="date-meta">Experiment · 2026.09 · 손세림</p>
+  </div>
+</section>
+
 <article class="detail-body article-body">
-<section class="detail-block"><h2>핵심 문제</h2><div class="summary-box"><p><strong>상품은 존재했고 날짜·가격·일정 조건도 맞았지만 AI 추천에는 포함되지 않았습니다.</strong></p><p>그래서 “정보가 있는데도 AI는 왜 상품을 찾지 못했을까?”를 핵심 질문으로 두고, 콘텐츠 양보다 정보가 어떤 상품의 어떤 조건인지 명확히 연결되는지를 먼저 확인했습니다.</p></div><div class="browser"><div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><img src="/assets/travel-product.png" alt="2027년 1월 15일 출발 오사카 여행상품 상세 페이지 실험 화면" width="1821" height="892"></div></section>
-<section class="detail-block"><h2>실험 설계</h2><p><strong>같은 질문을 반복하고, 복합 조건을 단계적으로 분해했습니다.</strong> 날짜·가격 같은 기본 조건에서 시작해 장소·일정·자유시간처럼 구체적인 조건을 추가하면서 어느 단계에서 상품이 누락되는지 확인했습니다.</p><div class="process-row"><span>01<br><strong>동일 질문 반복</strong></span><b>→</b><span>02<br><strong>조건 단계별 분해</strong></span><b>→</b><span>03<br><strong>AI 답변 기록</strong></span><b>→</b><span>04<br><strong>실제 페이지 대조</strong></span></div><p><a class="inline-link" href="/geo-measurement.html">실험·측정 기준 자세히 보기</a></p></section>
-<section class="detail-block"><h2>발견한 구조적 문제</h2><div class="finding-grid"><article class="finding-card"><span class="num">01</span><h3>상품 Entity가 약함</h3><p>브랜드 중심 title로는 개별 상품의 정체성이 충분히 드러나지 않았습니다.</p><div class="code-chip mono">&lt;title&gt;노랑풍선 [여행을 가볍게]&lt;/title&gt;</div></article><article class="finding-card"><span class="num">02</span><h3>핵심 조건 관계가 약함</h3><p>날짜와 가격은 존재했지만 해당 값이 어떤 상품의 조건인지 구조적으로 명확하지 않았습니다.</p><div class="code-chip">출발 2027.01.15<br>성인 849,000원</div></article><article class="finding-card"><span class="num">03</span><h3>중요 정보가 분산됨</h3><p>일정·포함사항·선택관광·예약 상태가 서로 다른 영역에 흩어져 있었습니다.</p><div class="code-chip">일정 / 포함 / 선택 / 예약 상태</div></article></div></section>
-<section class="detail-block"><h2>GEO 개선 우선순위</h2><p>모든 항목을 한 번에 바꾸지 않고 <strong>영향도 × 기대 효과 × 구현 비용</strong>을 기준으로 우선순위를 정했습니다.</p><div class="metric-table-wrap"><table class="metric-table"><thead><tr><th>개선안</th><th>Impact</th><th>Cost</th><th>Priority</th><th>판단</th></tr></thead><tbody><tr><td>상품 Entity 명확화</td><td>HIGH</td><td>LOW</td><td>P1</td><td>title·heading 등 낮은 비용으로 상품 식별력을 높일 수 있음</td></tr><tr><td>핵심 조건 구조화</td><td>HIGH</td><td>MID</td><td>P1</td><td>날짜·가격·일정과 상품의 관계를 명확히 연결</td></tr><tr><td>Structured Data</td><td>MID</td><td>MID</td><td>P2</td><td>명시적 구조를 보조하는 역할</td></tr><tr><td>추가 콘텐츠 제작</td><td>LOW</td><td>HIGH</td><td>P3</td><td>이미 핵심 정보가 존재해 우선순위 낮음</td></tr></tbody></table></div></section>
-<section class="detail-block"><h2>Optimization Example</h2><div class="before-after wide"><span class="ba-label">BEFORE</span><div class="ba-box mono">&lt;title&gt;노랑풍선 [여행을 가볍게]&lt;/title&gt;</div><span class="ba-label">AFTER · 제안</span><div class="ba-box after mono">&lt;title&gt;2027년 1월 15일 출발 오사카 2박 3일 패키지 | 노랑풍선&lt;/title&gt;</div></div><p><strong>새 정보를 덧붙이기보다, 이미 있는 정보의 Entity와 조건 관계를 먼저 명확히 만드는 것을 우선했습니다.</strong></p></section>
-<section class="detail-block"><h2>검증 방법과 한계</h2><p>재측정이 완료되지 않은 결과를 임의 수치로 채우지 않습니다. 현재 상태 확인 → 개선안 적용 → 같은 조건으로 재실험 → 개선 전후 비교 순서로 검증합니다.</p><ul class="plain-list"><li>LLM 답변은 같은 질문에도 달라질 수 있습니다.</li><li>검색 인덱스에 개선 내용이 반영되는 시점 차이가 있습니다.</li><li>플랫폼마다 검색·Retrieval 방식이 다릅니다.</li><li>AI 추천 노출과 실제 구매 전환은 별도로 측정해야 합니다.</li></ul></section>
-<section class="detail-block"><h2>관련 프레임워크</h2><p><a class="inline-link" href="/good-geo.html">좋은 GEO란 무엇인가?</a> · <a class="inline-link" href="/geo-measurement.html">GEO 성과 측정 방법</a></p></section>
-</article></main><script src="/assets/analytics-config.js"></script>
+
+<section class="detail-block">
+  <h2>프로젝트를 한 문장으로</h2>
+  <div class="summary-box">
+    <p><strong>실제 판매 중인 상품이 있는데 AI는 “상품이 없다”고 답했습니다.</strong></p>
+    <p>직접 URL이나 정확한 상품코드를 주면 페이지 내용을 읽을 수 있었기 때문에, 단순 크롤링 실패보다 <strong>일반 사용자 질문을 특정 상품·출발 Event에 연결하는 Retrieval 문제</strong>를 우선 의심했습니다.</p>
+  </div>
+  <div class="browser">
+    <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    <img src="/assets/travel-product.png" alt="오사카 여행상품 상세 페이지 실험 화면" width="1821" height="892">
+  </div>
+</section>
+
+<section class="detail-block">
+  <h2>1. 문제 발견 — AI False Negative</h2>
+  <p>같은 상품을 질문 방식만 바꿔 확인했습니다. 일반 자연어에서는 실패했지만, 상품 식별 정보를 강하게 줄수록 실제 페이지 정보를 찾을 수 있었습니다.</p>
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>테스트</th><th>질문 방식</th><th>관찰 결과</th><th>해석</th></tr></thead>
+      <tbody>
+        <tr><td>T1</td><td>일반 자연어 조건</td><td>상품 없음 / 미오픈으로 판단</td><td>실패</td></tr>
+        <tr><td>T2</td><td>여행사명 추가</td><td>도메인을 좁혀도 실패</td><td>실패</td></tr>
+        <tr><td>T3</td><td>정확한 상품코드 제공</td><td>가격·날짜·예약 정보 확인</td><td>성공</td></tr>
+        <tr><td>T4</td><td>상세 URL 직접 제공</td><td>페이지 정보 추출 가능</td><td>성공</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>핵심:</strong> “페이지를 못 읽는다”보다 <strong>Query → 정확한 상품/Event 매핑이 불안정하다</strong>는 쪽으로 문제 범위를 좁혔습니다.</p>
+</section>
+
+<section class="detail-block">
+  <h2>2. 원인 좁히기 — Date-to-Event Resolution Gap</h2>
+  <p>같은 상품군에도 출발일이 다른 여러 판매 Event가 존재합니다. 그래서 “상품을 찾았는가?”보다 한 단계 더 좁혀 <strong>사용자가 말한 날짜와 정확히 같은 출발 Event를 찾는가</strong>를 확인했습니다.</p>
+
+  <div class="finding-grid">
+    <article class="finding-card">
+      <span class="num">01</span>
+      <h3>Exact</h3>
+      <p>질문한 날짜와 정확히 같은 Event가 직접 노출</p>
+      <div class="code-chip">1 / 13</div>
+    </article>
+    <article class="finding-card">
+      <span class="num">02</span>
+      <h3>Wrong-date</h3>
+      <p>같은 상품군이지만 다른 출발일 Event가 노출</p>
+      <div class="code-chip">1 / 13</div>
+    </article>
+    <article class="finding-card">
+      <span class="num">03</span>
+      <h3>Indirect / Miss</h3>
+      <p>상품군·목록만 노출되거나 해당 Event를 찾지 못함</p>
+      <div class="code-chip">5 + 6 / 13</div>
+    </article>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>관찰:</strong> JOP1190 상품군의 실제 판매일 13개를 탐색했을 때 Exact 1, Wrong-date 1, Indirect 5, Miss 6이 섞였습니다.</p>
+    <p>대표 Event 페이지에는 정확한 출발일 정보가 내부 데이터에 존재했지만, title·meta description·og:title 등 문서 수준의 식별 신호는 여러 Event 사이에서 유사했습니다. 그래서 <strong>날짜가 특정 Event를 구분하는 신호로 충분히 작동하는지</strong>를 통제 실험으로 분리했습니다.</p>
+  </div>
+</section>
+
+<section class="detail-block">
+  <h2>3. 통제 실험 — V0 → V1 → V2</h2>
+  <p>여기서 중요한 점은 <strong>실제 Google 알고리즘을 재현한 실험이 아니라는 것</strong>입니다. 동일한 문서 조건에서 “날짜 신호를 텍스트로 추가하는 것”과 “날짜를 별도 속성으로 분리해 정확 일치시키는 것”의 차이를 보기 위해 로컬 검색 환경을 만들었습니다.</p>
+
+  <h3>V0 / V1 — meta description의 날짜 신호만 변경</h3>
+  <p>title, og:title, canonical, 본문, 내부 데이터는 동일하게 두고 <strong>meta description 맨 앞에 정확한 출발일을 넣었는지</strong>만 바꿨습니다.</p>
+
+  <div class="before-after wide">
+    <span class="ba-label">V0 · 기존</span>
+    <pre class="ba-box mono" style="white-space:pre-wrap;overflow:auto;"><code>&lt;meta name="description"
+      content="[기존 상품 설명]"&gt;</code></pre>
+
+    <span class="ba-label">V1 · 날짜 텍스트 추가</span>
+    <pre class="ba-box after mono" style="white-space:pre-wrap;overflow:auto;"><code>&lt;meta name="description"
+      content="2026년 12월 9일 출발. [기존 상품 설명]"&gt;</code></pre>
+  </div>
+  <p class="date-meta">※ 코드의 [기존 상품 설명]은 변경되지 않은 기존 문구를 축약해 표시한 것입니다.</p>
+
+  <h3>로컬 검색은 이렇게 비교했습니다</h3>
+  <pre class="ba-box mono" style="white-space:pre-wrap;overflow:auto;"><code># HTML에서 검색 신호 추출
+fields = {
+    "title": title_text,
+    "meta": meta_description,
+    "body": body_text
+}
+
+# char n-gram TF-IDF + cosine similarity
+# 가중치: title 3 / meta 2 / body 1
+score = title_score * 3 + meta_score * 2 + body_score</code></pre>
+
+  <p>이 검색기는 Google 복제품이 아니라 <strong>독립변수 하나가 lexical relevance에 어떤 차이를 만드는지 보기 위한 통제 장치</strong>였습니다.</p>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>Query</th><th>V0</th><th>V1</th><th>변화</th></tr></thead>
+      <tbody>
+        <tr><td>오사카 패키지</td><td>0.1797</td><td>0.1791</td><td>-0.3%</td></tr>
+        <tr><td>JOP1190</td><td>0.0178</td><td>0.0177</td><td>-0.6%</td></tr>
+        <tr><td>2026년 12월 9일</td><td>0.0883</td><td>0.1047</td><td><strong>+18.6%</strong></td></tr>
+        <tr><td>JOP1190 + 날짜</td><td>0.1172</td><td>0.1312</td><td><strong>+11.9%</strong></td></tr>
+        <tr><td>오사카 + 날짜 + 출발</td><td>0.1943</td><td>0.2119</td><td><strong>+9.1%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>결과:</strong> 날짜가 없는 Query는 거의 변하지 않았고, 날짜가 포함된 Query에서만 관련도가 상승했습니다. 즉 “날짜 텍스트를 명시하면 날짜 Query와 더 비슷해진다”는 것은 확인했습니다.</p>
+</section>
+
+<section class="detail-block">
+  <h2>4. 실패 케이스 — 날짜를 써도 정확한 Event는 틀릴 수 있었다</h2>
+  <p>단일 Event에서 관련도가 올라간 것만으로는 충분하지 않았습니다. 실제 상황처럼 <strong>출발일이 다른 4개 Event를 동시에</strong> 넣고 정확한 날짜의 Event가 1위가 되는지 다시 확인했습니다.</p>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>Query 날짜</th><th>V1 1위</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td>11/03</td><td>11/03 Event</td><td>Exact Hit</td></tr>
+        <tr><td>11/07</td><td>11/29 Event</td><td><strong>Wrong-date</strong></td></tr>
+        <tr><td>11/21</td><td>11/21 Event</td><td>Exact Hit</td></tr>
+        <tr><td>11/29</td><td>11/29 Event</td><td>Exact Hit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>V1 Exact Event Resolution = 3/4 = 75%</strong></p>
+    <p>11월 7일 Query에서도 V1 문서들의 점수는 전반적으로 올라갔지만, 정확한 11/07 Event가 아니라 11/29 Event가 1위였습니다. 날짜를 “문장 속 단어”로 넣는 것만으로는 정확한 일(day)이 필수 조건으로 작동하지 않았습니다.</p>
+  </div>
+</section>
+
+<section class="detail-block">
+  <h2>5. V2 — 날짜를 Event의 속성으로 분리</h2>
+  <p>V2에서는 날짜를 검색 문자열 안의 단어로만 다루지 않고, <strong>각 여행 Event의 구조화된 출발일 속성</strong>으로 분리했습니다. HTML에는 schema.org의 <code>TouristTrip</code>과 <code>departureTime</code>을 사용하고, 로컬 Retrieval에서는 Query 날짜와 이 값을 정확히 비교했습니다.</p>
+
+  <pre class="ba-box mono" style="white-space:pre-wrap;overflow:auto;"><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  "name": "오사카 패키지",
+  "departureTime": "2026-11-07"
+}
+&lt;/script&gt;</code></pre>
+
+  <p class="date-meta">※ 위 코드는 V2의 핵심 구조를 보여주는 축약 예시입니다. 실험에서는 Event별 departureTime을 분리해 읽었습니다.</p>
+
+  <pre class="ba-box mono" style="white-space:pre-wrap;overflow:auto;"><code>query_date = normalize_date(query)        # YYYY-MM-DD
+event_date = document.departureTime
+
+if query_date == event_date:
+    exact_match = True
+    priority = 1                          # 먼저 후보로 선택
+else:
+    exact_match = False
+
+# exact date match 이후에 TF-IDF를 보조 순위로 사용</code></pre>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>Query 날짜</th><th>선택된 departureTime</th><th>판정</th></tr></thead>
+      <tbody>
+        <tr><td>2026-11-03</td><td>2026-11-03</td><td>Exact Hit</td></tr>
+        <tr><td>2026-11-07</td><td>2026-11-07</td><td>Exact Hit</td></tr>
+        <tr><td>2026-11-21</td><td>2026-11-21</td><td>Exact Hit</td></tr>
+        <tr><td>2026-11-29</td><td>2026-11-29</td><td>Exact Hit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>V2 통제 후보군 Exact Event Resolution = 4/4 = 100%</strong></p>
+    <p><strong>하지만 “Schema를 넣었더니 검색 정확도가 100%가 됐다”는 뜻은 아닙니다.</strong> V2의 개선은 구조화된 <code>departureTime</code>을 읽고, Query 날짜와 정확히 일치하는 Event를 우선하도록 <strong>Retrieval 로직까지 직접 설계</strong>했기 때문에 발생했습니다. 실제 Google/AI Search 효과는 별도 실서비스 검증이 필요합니다.</p>
+  </div>
+</section>
+
+<section class="detail-block">
+  <h2>6. 여기까지의 결론</h2>
+  <div class="process-row">
+    <span>01<br><strong>False Negative</strong></span><b>→</b>
+    <span>02<br><strong>Retrieval 분리</strong></span><b>→</b>
+    <span>03<br><strong>Date-to-Event Gap</strong></span><b>→</b>
+    <span>04<br><strong>통제 실험</strong></span>
+  </div>
+  <ul class="plain-list">
+    <li>페이지에 정보가 존재하는 것과 일반 Query에서 해당 Event가 검색되는 것은 다른 문제였습니다.</li>
+    <li>meta description의 정확한 날짜는 날짜 관련 Query의 lexical relevance를 높였지만, 다중 Event 환경에서 정확한 날짜 선택을 보장하지 못했습니다.</li>
+    <li>날짜를 Event의 별도 속성으로 읽고 필수 조건으로 먼저 비교하면, 통제 후보군에서는 정확한 Event Resolution이 가능했습니다.</li>
+    <li>따라서 개선 방향은 “더 많은 문장을 추가”하는 것보다 <strong>상품·Event·필수 조건의 관계를 명확하게 만들고 Retrieval에서 먼저 검증</strong>하는 것입니다.</li>
+  </ul>
+</section>
+
+<section class="detail-block">
+  <h2>7. 추가 실험 전 Baseline — 장소로 찾으면 JOP1193이 노출되는가?</h2>
+  <p>날짜 실험 다음에는 <strong>상품 ↔ 관광지 관계</strong>를 따로 보기로 했습니다. 대상은 노랑풍선 오사카 상품군 <strong>JOP1193</strong>입니다. 실제 상세 페이지 본문에는 <strong>신사이바시</strong>와 <strong>도톤보리</strong>가 관광지로 존재하지만, 장소를 기준으로 AI에게 상품을 추천하게 했을 때 이 상품이 노출되는지는 별도 문제입니다.</p>
+
+  <p><a class="inline-link" href="https://genie.ybtour.co.kr/product/detailPackage?menu=PKG&amp;dspSid=AAEC000&amp;goodsCd=JOP1193&amp;evCd=JOP1193-261024RS00" target="_blank" rel="noopener noreferrer">Ground Truth로 확인한 JOP1193 상세 페이지 ↗</a></p>
+
+  <h3>노출 판정 기준</h3>
+  <ul class="plain-list">
+    <li>각 Prompt는 새 대화에서 독립 실행</li>
+    <li>최대 3개 추천 결과 안에 <strong>JOP1193 상품군</strong>이 등장하면 노출 O</li>
+    <li>특정 출발일 Event가 아니라 상품군과 장소의 연결을 보는 실험이므로 evCd 일치 여부는 판정에서 제외</li>
+    <li>P1~P4를 각각 5회, 총 20회 실행</li>
+  </ul>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>Prompt</th><th>질문 조건</th><th>실행</th><th>JOP1193 노출</th></tr></thead>
+      <tbody>
+        <tr><td>P1</td><td>도톤보리가 일정에 포함된 노랑풍선 오사카 패키지</td><td>5회</td><td><strong>0회</strong></td></tr>
+        <tr><td>P2</td><td>신사이바시가 일정에 포함된 노랑풍선 오사카 패키지</td><td>5회</td><td><strong>0회</strong></td></tr>
+        <tr><td>P3</td><td>신사이바시와 도톤보리가 모두 포함된 상품</td><td>5회</td><td><strong>0회</strong></td></tr>
+        <tr><td>P4</td><td>신사이바시와 도톤보리를 관광하는 상품</td><td>5회</td><td><strong>0회</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>Baseline Exposure Rate = 0 / 20 = 0%</strong></p>
+    <p>현재 확정할 수 있는 사실은 여기까지입니다. <strong>페이지에는 신사이바시·도톤보리 정보가 존재하지만, 설정한 4개의 장소 기반 추천 Prompt에서는 JOP1193이 20회 모두 노출되지 않았습니다.</strong></p>
+    <p>아직 “Schema가 부족해서 0%였다”고 결론내리지 않습니다. 원인과 개선 효과는 다음 실험에서 분리해 검증합니다.</p>
+  </div>
+</section>
+
+<section class="detail-block">
+  <h2>8. 1차 Place Schema 통제 실험 — 텍스트는 그대로, 관계만 구조화</h2>
+  <p>장소 기반 AI 노출 Baseline이 0/20이었던 이유를 바로 “Schema 부족”이라고 결론내리지 않고, 먼저 <strong>보이는 본문은 완전히 같게 두고 JSON-LD만 추가했을 때 무엇이 달라지는지</strong>를 통제 환경에서 확인했습니다.</p>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>항목</th><th>V0</th><th>V1</th></tr></thead>
+      <tbody>
+        <tr><td>보이는 HTML 본문</td><td>동일</td><td>동일</td></tr>
+        <tr><td>신사이바시·도톤보리 텍스트</td><td>있음</td><td>있음</td></tr>
+        <tr><td>JSON-LD</td><td>없음</td><td>추가</td></tr>
+        <tr><td>구조화 관계</td><td>없음</td><td>TouristTrip → itinerary → Place</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>V0 — 본문만 존재</h3>
+  <pre class="ba-box mono" style="white-space:pre-wrap;overflow:auto;"><code>&lt;section&gt;
+  &lt;h2&gt;관광지&lt;/h2&gt;
+
+  &lt;article&gt;
+    &lt;h3&gt;신사이바시&lt;/h3&gt;
+    &lt;p&gt;JOP1193 일정에 포함된 오사카의 관광지입니다.&lt;/p&gt;
+  &lt;/article&gt;
+
+  &lt;article&gt;
+    &lt;h3&gt;도톤보리&lt;/h3&gt;
+    &lt;p&gt;JOP1193 일정에 포함된 오사카의 관광지입니다.&lt;/p&gt;
+  &lt;/article&gt;
+&lt;/section&gt;</code></pre>
+
+  <h3>V1 — 같은 본문 + 장소 관계 JSON-LD</h3>
+  <pre class="ba-box mono" style="white-space:pre-wrap;overflow:auto;"><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  "name": "JOP1193 오사카 패키지",
+  "identifier": "JOP1193",
+  "itinerary": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Place",
+          "name": "신사이바시"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Place",
+          "name": "도톤보리"
+        }
+      }
+    ]
+  }
+}
+&lt;/script&gt;</code></pre>
+
+  <h3>실험 A — 일반 텍스트 검색</h3>
+  <p><code>&lt;script&gt;</code>와 <code>&lt;style&gt;</code>을 제거한 뒤, P1~P4와 문서 본문을 char n-gram TF-IDF + cosine similarity로 비교했습니다. V0와 V1의 보이는 본문이 동일하기 때문에 <strong>4개 Prompt 모두 V0와 V1의 점수가 같았고 차이는 0</strong>이었습니다.</p>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>Prompt</th><th>조건</th><th>V0 vs V1</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr><td>P1</td><td>도톤보리</td><td>동일</td><td>Δ 0</td></tr>
+        <tr><td>P2</td><td>신사이바시</td><td>동일</td><td>Δ 0</td></tr>
+        <tr><td>P3</td><td>신사이바시 + 도톤보리</td><td>동일</td><td>Δ 0</td></tr>
+        <tr><td>P4</td><td>두 장소 관광</td><td>동일</td><td>Δ 0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>해석 1 · Schema 추가만으로 본문 lexical relevance가 올라가지는 않았습니다.</strong></p>
+    <p>V1은 사용자에게 보이는 문장을 추가하지 않았기 때문에 텍스트 유사도 기준에서는 V0와 같은 문서입니다.</p>
+  </div>
+
+  <h3>실험 B — 구조화 관계 파싱</h3>
+  <p>다음에는 JSON-LD를 직접 파싱해 <code>TouristTrip → itinerary → Place</code> 관계가 명시적으로 추출되는지 확인했습니다.</p>
+
+  <div class="metric-table-wrap">
+    <table class="metric-table">
+      <thead><tr><th>Prompt</th><th>필요한 장소 관계</th><th>V0</th><th>V1</th></tr></thead>
+      <tbody>
+        <tr><td>P1</td><td>도톤보리</td><td>식별 X</td><td><strong>식별 O</strong></td></tr>
+        <tr><td>P2</td><td>신사이바시</td><td>식별 X</td><td><strong>식별 O</strong></td></tr>
+        <tr><td>P3</td><td>신사이바시 AND 도톤보리</td><td>식별 X</td><td><strong>식별 O</strong></td></tr>
+        <tr><td>P4</td><td>신사이바시 AND 도톤보리</td><td>식별 X</td><td><strong>식별 O</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary-box">
+    <p><strong>구조화 관계 식별: V0 0/4 → V1 4/4</strong></p>
+    <p>이 결과는 “Schema를 넣으면 AI 노출이 100%가 된다”는 의미가 아닙니다. <strong>같은 본문에서도 구조화 데이터를 읽는 시스템은 상품과 관광지의 관계를 별도 속성으로 명시적으로 식별할 수 있었다</strong>는 통제 실험 결과입니다.</p>
+  </div>
+</section>
+
+<section class="detail-block">
+  <h2>9. 다음 실험 — 실제 원본 구조를 보존해 다시 검증</h2>
+  <p>1차 V0/V1 페이지는 관계를 통제하기 위해 본문에 “JOP1193 일정에 포함된 관광지”라는 설명을 명확하게 적었습니다. 따라서 실제 노랑풍선 원본보다 <strong>상품 ↔ 장소 관계가 본문에서도 더 쉽게 읽히는 조건</strong>입니다.</p>
+  <p>다음 단계에서는 실제 JOP1193 페이지의 HTML 구조와 문구를 최대한 보존한 V0를 만들고, V1에는 <strong>Place 관계 JSON-LD만 추가</strong>합니다. 다른 요소를 바꾸지 않은 상태에서 동일한 P1~P4로 다시 비교합니다.</p>
+
+  <div class="process-row">
+    <span>01<br><strong>원본 구조 복제</strong></span><b>→</b>
+    <span>02<br><strong>V0 고정</strong></span><b>→</b>
+    <span>03<br><strong>V1 Schema만 추가</strong></span><b>→</b>
+    <span>04<br><strong>동일 Query 재검증</strong></span>
+  </div>
+
+  <p><strong>비교 지표:</strong> lexical relevance · 구조화 관계 식별 · JOP1193 Exposure Rate · 추천 순위 · 출처 인용 여부</p>
+  <p class="date-meta">Status · 장소 Baseline 0/20 완료 / 1차 Place Schema 통제 실험 완료 / 원본 구조 재실험 예정</p>
+</section>
+
+<section class="detail-block">
+  <h2>검증 범위와 한계</h2>
+  <ul class="plain-list">
+    <li>로컬 TF-IDF 실험은 Google 검색 알고리즘을 재현한 것이 아니라 원인 후보를 통제하기 위한 실험입니다.</li>
+    <li>V2의 100%는 작은 4개 Event 후보군과 직접 설계한 exact date Retrieval에서의 결과입니다.</li>
+    <li>구조화 데이터 자체가 Google/AI Search 노출을 올렸다고 일반화하지 않습니다.</li>
+    <li>장소 Baseline 0/20 역시 사용한 모델·검색 환경·실행 시점에 한정된 관찰값입니다.</li>
+    <li>1차 Place Schema 실험의 0/4 → 4/4는 구조화 관계 파서의 식별 결과이며, 실제 AI 추천 노출률을 의미하지 않습니다.</li>
+    <li>1차 V0/V1 본문은 원본보다 상품과 장소의 관계를 더 명확하게 적은 통제용 페이지이므로, 실제 원본 구조를 보존한 재실험이 필요합니다.</li>
+    <li>AI 추천 노출과 실제 클릭·예약 전환은 별도 지표로 검증해야 합니다.</li>
+  </ul>
+</section>
+
+<section class="detail-block">
+  <h2>관련 프레임워크</h2>
+  <p><a class="inline-link" href="/good-geo.html">좋은 GEO란 무엇인가?</a> · <a class="inline-link" href="/geo-measurement.html">GEO 성과 측정 방법</a></p>
+</section>
+
+</article>
+</main>
+
+<script src="/assets/analytics-config.js"></script>
 <script src="/assets/analytics.js" defer></script>
-<script src="/assets/main.js" defer></script></body></html>
+<script src="/assets/main.js" defer></script>
+</body>
+</html>
