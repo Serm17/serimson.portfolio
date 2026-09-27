@@ -368,6 +368,14 @@ main { padding-top: 64px; }
 .flow-inline b, .process-row b { color: var(--blue); }
 .process-row span { min-width: 128px; line-height: 1.55; color: var(--muted); }
 .process-row span strong { color: var(--ink); }
+.process-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr) 16px) minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+}
+.process-row span { min-width: 0; word-break: keep-all; }
+.process-row b { align-self: center; text-align: center; }
 .metric-table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
 .metric-table { width: 100%; border-collapse: collapse; min-width: 720px; font-size: 13px; }
 .metric-table th, .metric-table td { padding: 17px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; line-height: 1.55; }
@@ -387,6 +395,9 @@ main { padding-top: 64px; }
 
 @media (max-width: 1000px) { .knowledge-grid.five { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 900px) { .knowledge-grid { grid-template-columns: repeat(2,1fr); } .related-grid { grid-template-columns:1fr; } .baseline-strip { align-items:flex-start; flex-direction:column; gap:6px; } }
+@media (min-width: 561px) and (max-width: 900px) {
+  .process-row { grid-template-columns: repeat(4, minmax(150px, 1fr) 16px) minmax(150px, 1fr); overflow-x: auto; }
+}
 @media (max-width: 560px) { .knowledge-grid, .knowledge-grid.five { grid-template-columns:1fr; } .summary-box, .definition-box { padding:22px; } .flow-inline, .process-row { display:grid; grid-template-columns:1fr; } .flow-inline b, .process-row b { transform:rotate(90deg); justify-self:center; } }
 
 /* GEO portfolio keyword hub */
