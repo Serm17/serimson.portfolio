@@ -71,27 +71,22 @@
 <main>
   <section class="detail-hero article-hero"><div class="section-inner">
     <div class="section-kicker">About 손세림</div>
-    <h1 class="display-md">손세림<br></h1>
-    <div><img src="./assets/img/soneserim.jpg" alt="손세림" style="width: 200px; height: auto;"></div>
-    <section class="detail-block">
+    <h1 class="display-md">손세림</h1>
+    <section class="detail-block career-section">
       <h2>Through the years</h2>
-      <div class="summary-box">
-        <p><strong>2017.02 ~ 2021.03 동아대학교 미술학과 졸업</strong></p>
-        <p>목조형가구를 디자인하고 제작하는 경험을 통해, 사용자 중심의 디자인 사고를 배웠습니다.</p>
-        <pre>Tool : Photoshop, Illustrator, CAD , Sketch , Premiere Pro</pre>
-
-        <p><strong>2021.03 ~ 2023.02 공예학과 학사조교</strong></p>
-        <p>학과 행정 및 사무 전반, 교직원·학생 일정 및 학사 업무 조율, 2023 동아대학교 미술실기대회 기획·운영 지원</p>
-        <pre>Tool : 한글, Words, Excel, ppt</pre>
-
-        <p><strong>2023.10 ~ 2024.01 MJ Team Web Developer · Publisher</strong></p>
-        <p>웹디자인과 퍼블리싱을 경험하며 사용자가 정보를 쉽게 찾을 수 있도록 구조를 설계하는 것의 중요성을 배웠습니다.</p>
-        <pre>Tool : figma, Adobe XD, HTML, CSS, JavaScript</pre>
-
-        <p><strong>2024.02 ~ 2026.02 SONY Korea _ 파견</strong></p>
-        <p>수입 제품 관련 행정·정산, 환경세 계산, 자료 검수 및 디자인 업무 지원 <br>수치 오류의 원인을 추적하고 업무 기준을 문서화하며, 정확한 운영과 재현 가능한 프로세스의 중요성을 배웠습니다.</p>
-        <pre>Tool : SAP</pre>
+      <p class="career-hint">원형 단계를 선택하면 경험과 사용 도구를 볼 수 있습니다.</p>
+      <div class="career-flow-scroll">
+        <div class="career-timeline" aria-label="손세림 경력 타임라인">
+          <button class="career-step" type="button" aria-expanded="false" aria-controls="career-01"><span class="career-dot">01</span><span class="career-name">미술학과</span><span class="career-date">2017.02 – 2021.03</span></button>
+          <button class="career-step" type="button" aria-expanded="false" aria-controls="career-02"><span class="career-dot">02</span><span class="career-name">공예학과 학사조교</span><span class="career-date">2021.03 – 2023.02</span></button>
+          <button class="career-step" type="button" aria-expanded="false" aria-controls="career-03"><span class="career-dot">03</span><span class="career-name">웹디자인 · 퍼블리싱</span><span class="career-date">2023.10 – 2024.01</span></button>
+          <button class="career-step" type="button" aria-expanded="false" aria-controls="career-04"><span class="career-dot">04</span><span class="career-name">SONY Korea</span><span class="career-date">2024.02 – 2026.02</span></button>
+        </div>
       </div>
+      <div class="career-panel" id="career-01" hidden><div><span class="career-panel-date">2017.02 – 2021.03</span><h3>동아대학교 미술학과 졸업</h3><p>목조형가구를 디자인하고 제작하는 경험을 통해 사용자 중심의 디자인 사고를 배웠습니다.</p></div><p class="career-tools"><strong>Tool</strong> Photoshop · Illustrator · CAD · Sketch · Premiere Pro</p></div>
+      <div class="career-panel" id="career-02" hidden><div><span class="career-panel-date">2021.03 – 2023.02</span><h3>공예학과 학사조교</h3><p>학과 행정 및 사무 전반, 교직원·학생 일정과 학사 업무 조율, 2023 동아대학교 미술실기대회 기획·운영을 지원했습니다.</p></div><p class="career-tools"><strong>Tool</strong> 한글 · Word · Excel · PowerPoint</p></div>
+      <div class="career-panel" id="career-03" hidden><div><span class="career-panel-date">2023.10 – 2024.01</span><h3>MJ Team · Web Developer / Publisher</h3><p>웹디자인과 퍼블리싱을 경험하며 사용자가 정보를 쉽게 찾을 수 있도록 구조를 설계하는 것의 중요성을 배웠습니다.</p></div><p class="career-tools"><strong>Tool</strong> Figma · Adobe XD · HTML · CSS · JavaScript</p></div>
+      <div class="career-panel" id="career-04" hidden><div><span class="career-panel-date">2024.02 – 2026.02</span><h3>SONY Korea · 파견</h3><p>수입 제품 관련 행정·정산, 환경세 계산, 자료 검수 및 디자인 업무를 지원했습니다. 수치 오류의 원인을 추적하고 업무 기준을 문서화하며 정확한 운영과 재현 가능한 프로세스의 중요성을 배웠습니다.</p></div><p class="career-tools"><strong>Tool</strong> SAP</p></div>
     </section>
 
     <h1>AS GEO / AI Search Researcher</h1>
@@ -106,6 +101,19 @@
     <section class="detail-block"><h2>GEO 프로젝트</h2><div class="related-grid"><a class="related-card" href="/project-01.html"><span>PROJECT 01</span><h3>여행상품 페이지 GEO 개선 실험</h3><p>조건에 맞는 상품이 AI 추천에서 누락되는 원인을 정보 구조 관점에서 분석합니다.</p></a><a class="related-card" href="/project-02.html"><span>PROJECT 02</span><h3>Can AI Find Me?</h3><p>이 포트폴리오 자체의 발견성·Entity 이해·인용 여부를 실제 검색 환경에서 측정합니다.</p></a></div></section>
     <section class="detail-block"><h2>GEO에 대한 관점</h2><p>좋은 GEO의 정의와 측정 기준은 별도 페이지에 공개하고 있습니다. 이 기준은 업계의 공식 표준이라고 주장하지 않으며, 프로젝트를 일관되게 비교하기 위해 제가 정한 실험 프레임워크입니다.</p><p><a class="inline-link" href="/good-geo.html">좋은 GEO란 무엇인가?</a> · <a class="inline-link" href="/geo-measurement.html">GEO를 어떻게 측정할까?</a></p></section>
   </article>
-</main><script src="/assets/analytics-config.js"></script>
+</main><script>
+  const careerSteps = document.querySelectorAll('.career-step');
+  careerSteps.forEach((step) => step.addEventListener('click', () => {
+    const shouldOpen = step.getAttribute('aria-expanded') !== 'true';
+    careerSteps.forEach((item) => {
+      item.setAttribute('aria-expanded', 'false');
+      document.getElementById(item.getAttribute('aria-controls')).hidden = true;
+    });
+    if (shouldOpen) {
+      step.setAttribute('aria-expanded', 'true');
+      document.getElementById(step.getAttribute('aria-controls')).hidden = false;
+    }
+  }));
+</script><script src="/assets/analytics-config.js"></script>
 <script src="/assets/analytics.js" defer></script>
 <script src="/assets/main.js" defer></script></body></html>
