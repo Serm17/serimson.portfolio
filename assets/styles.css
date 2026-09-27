@@ -482,8 +482,8 @@ body { font-size: 17px; }
 
 .closing-copy p { font-size: 18px; }
 .closing-meta { font-size: 13px; }
-.about-detail-link { display: inline-flex; align-items: center; gap: 16px; margin-top: 26px; padding: 12px 0; color: var(--ink); font-size: 20px; font-weight: 800; border-bottom: 2px solid var(--ink); }
-.about-detail-link:hover, .about-detail-link:focus-visible { color: var(--blue); border-color: var(--blue); }
+.about-detail-link, .project-link { display: inline-flex; align-items: center; gap: 16px; margin-top: 26px; padding: 12px 0; color: var(--ink); font-size: 20px; font-weight: 800; border-bottom: 2px solid var(--ink); }
+.about-detail-link:hover, .about-detail-link:focus-visible, .project-link:hover, .project-link:focus-visible { color: var(--blue); border-color: var(--blue); }
 .closing-meta { color: var(--ink); font-size: 16px; }
 .closing-links { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-start; }
 .closing-links a { color: var(--ink); font-size: 17px; font-weight: 750; text-decoration: underline; text-underline-offset: 4px; }
@@ -492,7 +492,6 @@ body { font-size: 17px; }
   .closing-meta { flex-direction: column; }
   .closing-links { gap: 14px 20px; }
 }
-.project-link { font-size: 14px; }
 .back-link { font-size: 14px; }
 .detail-block p { font-size: 17px; }
 
