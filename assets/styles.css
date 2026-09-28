@@ -782,3 +782,21 @@ body { font-size: 17px; }
 .project-summary-box {
   margin-bottom: 50px;
 }
+
+
+/* Project 01 Date-to-Event result notes */
+.finding-card .result-note {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.date-event-observation {
+  max-width: 920px;
+  margin: 26px 0 0;
+  color: var(--ink);
+  line-height: 1.75;
+}
+.date-event-observation + .date-event-observation {
+  margin-top: 10px;
+}
