@@ -565,3 +565,35 @@ body { font-size: 17px; }
   .measure-step-label { font-size: 13px; }
   .query-card p { font-size: 15px; }
 }
+
+
+/* Random hero orbs — 2026-09-28 */
+.hero { position: relative; overflow: hidden; }
+.hero-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero .section-inner { position: relative; z-index: 1; }
+.hero-orb {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: rgba(54, 94, 255, var(--alpha));
+  filter: blur(var(--blur));
+  transform: translate3d(0, 0, 0);
+  animation: hero-orb-drift var(--duration) ease-in-out var(--delay) infinite alternate;
+  will-change: transform;
+}
+@keyframes hero-orb-drift {
+  0% { transform: translate3d(calc(var(--dx) * -1), calc(var(--dy) * -1), 0) scale(.92); }
+  100% { transform: translate3d(var(--dx), var(--dy), 0) scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb { animation: none; }
+}
