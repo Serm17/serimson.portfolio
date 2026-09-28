@@ -89,16 +89,16 @@
   <p>같은 상품을 질문 방식만 바꿔 확인했습니다. 일반 자연어에서는 실패했지만, 상품 식별 정보를 강하게 줄수록 실제 페이지 정보를 찾을 수 있었습니다.</p>
   <div class="metric-table-wrap">
     <table class="metric-table">
-      <thead><tr><th>테스트</th><th>질문 방식</th><th>관찰 결과</th><th>해석</th></tr></thead>
+      <thead><tr><th>테스트</th><th>질문</th><th>관찰 결과</th><th>해석</th></tr></thead>
       <tbody>
-        <tr><td>T1</td><td>일반 자연어 조건</td><td>상품 없음 / 미오픈으로 판단</td><td>실패</td></tr>
-        <tr><td>T2</td><td>여행사명 추가</td><td>도메인을 좁혀도 실패</td><td>실패</td></tr>
-        <tr><td>T3</td><td>정확한 상품코드 제공</td><td>가격·날짜·예약 정보 확인</td><td>성공</td></tr>
-        <tr><td>T4</td><td>상세 URL 직접 제공</td><td>페이지 정보 추출 가능</td><td>성공</td></tr>
+        <tr><td>T1</td><td>2027년 1월 15일 출발, 2박 3일 오사카 패키지 중 1인 기본 상품가 120만 원 이하이며 현재 예약 가능한 상품을 추천해줘.</td><td>상품 없음 / 미오픈으로 판단</td><td>실패</td></tr>
+        <tr><td>T2</td><td>2027년 1월 15일 출발해서 1월 17일 돌아오는 2박 3일 오사카 패키지여행 중, 노랑풍선에서 판매하는 상품을 찾아줘. 1인 기본 상품가 120만 원 이하이고 현재 예약 가능한 상품이 있다면 최대 3개 추천해줘.</td><td>도메인을 좁혀도 실패</td><td>실패</td></tr>
+        <tr><td>T3</td><td>상품코드 JOP1193인 오사카 패키지여행 상품을 찾아줘. 실제 존재 여부와 상품명·출발일·가격·예약 가능 여부를 알려줘.</td><td>가격·날짜·예약 정보 확인</td><td>성공</td></tr>
+        <tr><td>T4</td><td>이 상품 페이지의 상품명·출발일·가격·예약 가능 여부를 확인해줘.<br><span class="mono small">https://tourexpress.ybtour.co.kr/product/detailPackage?menu=PKG&amp;dspSid=AAEC000&amp;goodsCd=JOP1193&amp;evCd=JOP1310-270115ZE01</span></td><td>페이지 정보 추출 가능</td><td>성공</td></tr>
       </tbody>
     </table>
   </div>
-  <p><strong>핵심:</strong> “페이지를 못 읽는다”보다 <strong>Query → 정확한 상품/Event 매핑이 불안정하다</strong>는 쪽으로 문제 범위를 좁혔습니다.</p>
+  <p>“페이지를 못 읽는다”보다 <strong>Query → 정확한 상품/Event 매핑이 불안정하다</strong>는 쪽으로 문제 범위를 좁혔습니다.</p>
 </section>
 
 <section class="detail-block">
