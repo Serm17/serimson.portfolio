@@ -135,7 +135,7 @@
 
 <section class="detail-block">
   <h2>3. 통제 실험 — V0 → V1 → V2</h2>
-  <p>여기서 중요한 점은 <strong>실제 Google 알고리즘을 재현한 실험이 아니라는 것</strong>입니다. 동일한 문서 조건에서 “날짜 신호를 텍스트로 추가하는 것”과 “날짜를 별도 속성으로 분리해 정확 일치시키는 것”의 차이를 보기 위해 로컬 검색 환경을 만들었습니다.</p>
+  <p><strong>실제 Google 알고리즘을 재현한 실험이 아닙니다</strong>. 동일한 문서 조건에서 “날짜 신호를 텍스트로 추가하는 것”과 “날짜를 별도 속성으로 분리해 정확 일치시키는 것”의 차이를 보기 위해 로컬 검색 환경을 만들었습니다.</p>
 
   <h3>V0 / V1 — meta description의 날짜 신호만 변경</h3>
   <p>title, og:title, canonical, 본문, 내부 데이터는 동일하게 두고 <strong>meta description 맨 앞에 정확한 출발일을 넣었는지</strong>만 바꿨습니다.</p>
@@ -182,7 +182,7 @@ score = title_score * 3 + meta_score * 2 + body_score</code></pre>
 </section>
 
 <section class="detail-block">
-  <h2>4. 실패 케이스 — 날짜를 써도 정확한 Event는 틀릴 수 있었다</h2>
+  <h2>4. 실패 케이스 — 날짜를 써도 정확한 Event는 틀릴 수 있다</h2>
   <p>단일 Event에서 관련도가 올라간 것만으로는 충분하지 않았습니다. 실제 상황처럼 <strong>출발일이 다른 4개 Event를 동시에</strong> 넣고 정확한 날짜의 Event가 1위가 되는지 다시 확인했습니다.</p>
 
   <div class="metric-table-wrap">
@@ -197,10 +197,8 @@ score = title_score * 3 + meta_score * 2 + body_score</code></pre>
     </table>
   </div>
 
-  <div class="summary-box">
-    <p><strong>V1 Exact Event Resolution = 3/4 = 75%</strong></p>
-    <p>11월 7일 Query에서도 V1 문서들의 점수는 전반적으로 올라갔지만, 정확한 11/07 Event가 아니라 11/29 Event가 1위였습니다. 날짜를 “문장 속 단어”로 넣는 것만으로는 정확한 일(day)이 필수 조건으로 작동하지 않았습니다.</p>
-  </div>
+  <p><strong>V1 Exact Event Resolution = 3/4 = 75%</strong></p>
+  <p>11월 7일 Query에서도 V1 문서들의 점수는 전반적으로 올라갔지만, 정확한 11/07 Event가 아니라 11/29 Event가 1위였습니다. 날짜를 “문장 속 단어”로 넣는 것만으로는 정확한 일(day)이 필수 조건으로 작동하지 않았습니다.</p>
 </section>
 
 <section class="detail-block">
