@@ -749,3 +749,10 @@ body { font-size: 17px; }
   .measure-metric-grid .metric-card h3 { font-size: 18px; }
   .measure-metric-grid .metric-card p { font-size: 14px; }
 }
+
+
+/* About page: GEO thoughts emphasis */
+.geo-thoughts .geo-thought-main,
+.geo-thoughts .geo-thought-sub {
+  color: var(--ink);
+}
