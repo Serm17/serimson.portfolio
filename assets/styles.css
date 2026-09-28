@@ -812,3 +812,39 @@ body { font-size: 17px; }
 .project02-status .baseline-card {
   margin-bottom: 30px;
 }
+
+
+/* Project 02 collapsible GEO structure */
+.geo-structure-details {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.geo-structure-details summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 24px 52px 24px 0;
+  font-size: clamp(30px,4vw,50px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--ink);
+}
+.geo-structure-details summary::-webkit-details-marker {
+  display: none;
+}
+.geo-structure-details summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--blue);
+}
+.geo-structure-details[open] summary::after {
+  content: "−";
+}
+.geo-structure-details .ia-list {
+  padding: 8px 0 24px;
+}
