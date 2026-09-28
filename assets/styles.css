@@ -756,3 +756,13 @@ body { font-size: 17px; }
 .geo-thoughts .geo-thought-sub {
   color: var(--ink);
 }
+
+
+/* Good GEO page section spacing */
+.good-geo-page .article-body .detail-block {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.good-geo-page .article-body .detail-block + .detail-block {
+  margin-top: 200px;
+}
