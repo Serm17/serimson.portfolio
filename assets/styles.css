@@ -800,3 +800,15 @@ body { font-size: 17px; }
 .date-event-observation + .date-event-observation {
   margin-top: 10px;
 }
+
+
+/* Project 02 status cards */
+.project02-status .baseline-card,
+.project02-status .summary-box {
+  width: 100%;
+  max-width: 760px;
+  box-sizing: border-box;
+}
+.project02-status .baseline-card {
+  margin-bottom: 30px;
+}
