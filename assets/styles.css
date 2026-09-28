@@ -776,3 +776,9 @@ body { font-size: 17px; }
 .geo-measurement-page .article-body .detail-block + .detail-block {
   margin-top: 200px;
 }
+
+
+/* Project 01 summary spacing */
+.project-summary-box {
+  margin-bottom: 50px;
+}
