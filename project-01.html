@@ -102,8 +102,8 @@
 </section>
 
 <section class="detail-block">
-  <h2>2. 원인 좁히기 — Date-to-Event Resolution Gap</h2>
-  <p>같은 상품군에도 출발일이 다른 여러 판매 Event가 존재합니다. 그래서 “상품을 찾았는가?”보다 한 단계 더 좁혀 <strong>사용자가 말한 날짜와 정확히 같은 출발 Event를 찾는가</strong>를 확인했습니다.</p>
+  <h2>2. 원인 좁히기</h2>
+  <p>같은 상품군에도 출발일이 다른 여러 판매 Event가 존재합니다. 그래서 “상품을 찾았는가?”보다 한 단계 더 나아가 <strong>사용자가 말한 날짜와 정확히 같은 출발 Event를 찾는가</strong>를 확인했습니다.</p>
 
   <div class="finding-grid">
     <article class="finding-card">
@@ -111,25 +111,26 @@
       <h3>Exact</h3>
       <p>질문한 날짜와 정확히 같은 Event가 직접 노출</p>
       <div class="code-chip">1 / 13</div>
+      <p class="result-note">13개 실제 판매일 중 정확한 출발 Event가 노출된 경우 1개</p>
     </article>
     <article class="finding-card">
       <span class="num">02</span>
       <h3>Wrong-date</h3>
       <p>같은 상품군이지만 다른 출발일 Event가 노출</p>
       <div class="code-chip">1 / 13</div>
+      <p class="result-note">13개 실제 판매일 중 다른 날짜의 Event가 노출된 경우 1개</p>
     </article>
     <article class="finding-card">
       <span class="num">03</span>
       <h3>Indirect / Miss</h3>
       <p>상품군·목록만 노출되거나 해당 Event를 찾지 못함</p>
       <div class="code-chip">5 + 6 / 13</div>
+      <p class="result-note">13개 실제 판매일 중 간접 노출 5개, 해당 Event 미노출 6개</p>
     </article>
   </div>
 
-  <div class="summary-box">
-    <p><strong>관찰:</strong> JOP1190 상품군의 실제 판매일 13개를 탐색했을 때 Exact 1, Wrong-date 1, Indirect 5, Miss 6이 섞였습니다.</p>
-    <p>대표 Event 페이지에는 정확한 출발일 정보가 내부 데이터에 존재했지만, title·meta description·og:title 등 문서 수준의 식별 신호는 여러 Event 사이에서 유사했습니다. 그래서 <strong>날짜가 특정 Event를 구분하는 신호로 충분히 작동하는지</strong>를 통제 실험으로 분리했습니다.</p>
-  </div>
+  <p class="date-event-observation"><strong>관찰:</strong> JOP1190 상품군의 실제 판매일 13개를 탐색했을 때 Exact 1, Wrong-date 1, Indirect 5, Miss 6이 섞였습니다.</p>
+  <p class="date-event-observation">대표 Event 페이지에는 정확한 출발일 정보가 내부 데이터에 존재했지만, title·meta description·og:title 등 문서 수준의 식별 신호는 여러 Event 사이에서 유사했습니다. 그래서 <strong>날짜가 특정 Event를 구분하는 신호로 충분히 작동하는지</strong>를 통제 실험으로 분리했습니다.</p>
 </section>
 
 <section class="detail-block">
