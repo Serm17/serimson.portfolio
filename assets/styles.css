@@ -766,3 +766,13 @@ body { font-size: 17px; }
 .good-geo-page .article-body .detail-block + .detail-block {
   margin-top: 200px;
 }
+
+
+/* GEO measurement page section spacing */
+.geo-measurement-page .article-body .detail-block {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.geo-measurement-page .article-body .detail-block + .detail-block {
+  margin-top: 200px;
+}
