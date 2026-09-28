@@ -597,3 +597,158 @@ body { font-size: 17px; }
 @media (prefers-reduced-motion: reduce) {
   .hero-orb { animation: none; }
 }
+
+
+/* HOW I MEASURE GEO — reference layout 2026-09-28 */
+.measure-section {
+  background: var(--bg);
+}
+.measure-section .section-inner {
+  max-width: 1480px;
+}
+.measure-heading {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0 0 38px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.measure-heading-orb {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(circle at 30% 28%, #ffffff 0 10%, #dbeafe 24%, #8caeff 56%, #b8b4ff 76%, #ffffff 100%);
+  box-shadow: inset 0 0 0 1px rgba(37,99,235,.07);
+}
+.measure-heading-orb::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: rgba(219,234,254,.86);
+  box-shadow: 0 0 22px rgba(37,99,235,.20);
+}
+.measure-hero-copy {
+  text-align: center;
+  padding: 10px 0 72px;
+}
+.measure-quote {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(42px, 4.15vw, 66px);
+  line-height: 1.08;
+  letter-spacing: -.055em;
+  font-weight: 700;
+  color: var(--ink);
+}
+.measure-korean {
+  margin: 58px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.measure-description {
+  margin: 24px auto 0;
+  max-width: 840px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  word-break: keep-all;
+}
+.measure-metric-grid {
+  gap: 16px;
+}
+.measure-metric-grid .metric-card {
+  min-height: 190px;
+  border-radius: 30px;
+  border: 0;
+  box-shadow: none;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  padding: 34px 40px;
+}
+.measure-metric-grid .metric-num {
+  position: static;
+  flex: 0 0 112px;
+  margin: 0;
+  font-size: clamp(54px, 5vw, 78px);
+  line-height: 1;
+  color: #f0f1f4;
+  font-weight: 500;
+  letter-spacing: -.05em;
+}
+.measure-metric-grid .metric-card h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -.03em;
+}
+.measure-metric-grid .metric-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #7b7d85;
+  word-break: keep-all;
+}
+.measure-metric-grid .metric-card {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  align-content: center;
+}
+.measure-metric-grid .metric-card h3,
+.measure-metric-grid .metric-card p {
+  grid-column: 2;
+}
+.measure-metric-grid .metric-num {
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+.measure-metric-grid .metric-card:nth-child(1),
+.measure-metric-grid .metric-card:nth-child(2),
+.measure-metric-grid .metric-card:nth-child(3) {
+  grid-column: span 2;
+}
+.measure-metric-grid .metric-card:nth-child(4) {
+  grid-column: 1 / span 3;
+}
+.measure-metric-grid .metric-card:nth-child(5) {
+  grid-column: 4 / span 3;
+}
+
+@media (max-width: 1000px) {
+  .measure-heading { margin-bottom: 26px; }
+  .measure-hero-copy { padding-bottom: 50px; }
+  .measure-korean { margin-top: 38px; }
+  .measure-description { font-size: 15px; }
+  .measure-metric-grid .metric-card:nth-child(n) { grid-column: auto; }
+  .measure-metric-grid { grid-template-columns: 1fr 1fr; }
+  .measure-metric-grid .metric-card:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .measure-heading { gap: 14px; font-size: 13px; }
+  .measure-heading-orb { width: 36px; height: 36px; flex-basis: 36px; }
+  .measure-hero-copy { padding: 2px 0 38px; }
+  .measure-quote { font-size: clamp(34px, 10vw, 46px); }
+  .measure-korean { margin-top: 28px; font-size: 15px; }
+  .measure-description { margin-top: 18px; font-size: 14px; }
+  .measure-metric-grid { grid-template-columns: 1fr; }
+  .measure-metric-grid .metric-card:last-child { grid-column: auto; }
+  .measure-metric-grid .metric-card {
+    min-height: 142px;
+    border-radius: 22px;
+    padding: 26px 24px;
+    grid-template-columns: 82px 1fr;
+  }
+  .measure-metric-grid .metric-num { font-size: 50px; }
+  .measure-metric-grid .metric-card h3 { font-size: 18px; }
+  .measure-metric-grid .metric-card p { font-size: 14px; }
+}
