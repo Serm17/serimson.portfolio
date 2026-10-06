@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CineVerse의 제품 가설, 추천 방식에 대한 판단, 대화 흐름과 후속 대화 정책.">
+  <title>04 CineVerse — 제품 판단과 대화 경험</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23252b36'/%3E%3Cpath d='M22 9a9 9 0 1 0 0 14' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: dark; --bg: #141414; --panel: #222; --text: #fff; --muted: #bcbcbc; --accent: #e50914; --line: #333; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.85 "Malgun Gothic", sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: #ff5058; }
+    a:focus-visible { outline: 2px solid white; outline-offset: 6px; }
+    .skip { position: absolute; top: -100px; left: 24px; padding: 8px 16px; background: #222; z-index: 2; }
+    .skip:focus { top: 12px; }
+    .container { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+    header { padding: 26px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid #292929; }
+    .brand { color: var(--accent); font-family: Arial, sans-serif; font-size: 2rem; font-weight: 900; letter-spacing: -.06em; line-height: 1.2; }
+    header p { margin: 0; color: var(--muted); font-size: .875rem; }
+    .intro { padding: 90px 0 72px; max-width: 940px; }
+    .eyebrow { color: #ccc; margin: 0 0 24px; font-size: .875rem; font-weight: 700; letter-spacing: .14em; display: flex; align-items: center; gap: 12px; }
+    .eyebrow::before { content: ""; display: inline-block; width: 4px; height: 20px; background: var(--accent); }
+    h1 { font-size: clamp(2.4rem, 5.6vw, 4.7rem); line-height: 1.18; letter-spacing: -.055em; margin: 0; font-weight: 900; }
+    .subtitle { font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.7; margin: 30px 0 0; color: #d2d2d2; }
+    nav { border-bottom: 1px solid var(--line); }
+    nav ol { display: flex; flex-wrap: wrap; gap: 0 32px; list-style: none; margin: 0; padding: 0; font-size: .95rem; color: #bcbcbc; }
+    nav a { display: block; padding: 16px 0; border-bottom: 3px solid transparent; }
+    nav a:hover, nav a:focus-visible { color: white; border-bottom-color: var(--accent); }
+    section { padding: 60px 0; border-bottom: 1px solid #2b2b2b; scroll-margin-top: 24px; }
+    section > p { max-width: 900px; }
+    h2 { font-size: 1.8rem; line-height: 1.5; margin: 0 0 28px; letter-spacing: -.03em; }
+    h2 span { display: block; margin-bottom: 10px; color: #aaa; font-size: .875rem; font-weight: 600; letter-spacing: .08em; }
+    h3 { margin: 0 0 14px; font-size: 1.2rem; line-height: 1.6; }
+    p { margin: 0 0 22px; color: var(--muted); }
+    p:last-child { margin-bottom: 0; }
+    .note { max-width: 900px; background: #202020; border-left: 4px solid var(--accent); padding: 26px 30px; margin-top: 26px; }
+    .note h3 { color: #ff626a; font-size: .9rem; }
+    .note p { color: #efefef; }
+    .questions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; list-style: none; padding: 0; margin: 28px 0; counter-reset: question; }
+    .questions li { counter-increment: question; background: #222; padding: 26px; border-radius: 4px; border-top: 3px solid #454545; }
+    .questions li::before { content: "0" counter(question); display: block; color: #ff4d58; font: 700 2.4rem/1.2 Arial, sans-serif; margin-bottom: 28px; }
+    .insights { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; margin: 28px 0; counter-reset: insight; }
+    .insights > div { counter-increment: insight; background: #242424; padding: 32px; border-radius: 4px; border-top: 4px solid var(--accent); }
+    .insights > div::before { content: "0" counter(insight); display: block; color: #a3a3a3; font: 700 3rem/1 Arial, sans-serif; margin-bottom: 26px; }
+    .insights h3 { font-size: 1.4rem; }
+    .insights p { max-width: 460px; }
+    .definition { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.6; color: white; letter-spacing: -.035em; }
+    #problem { border-bottom: none; padding: 64px 0 80px; }
+    #problem .definition { border-left: 5px solid var(--accent); padding-left: 28px; max-width: 100%; margin-bottom: 28px; }
+    footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: #aaa; font-size: .875rem; line-height: 2.5; }
+    @media (max-width: 850px) { .questions { grid-template-columns: 1fr; } .questions li { display: flex; align-items: center; gap: 24px; } .questions li::before { margin: 0; font-size: 1.8rem; } }
+    @media (max-width: 600px) { .container { width: calc(100% - 40px); } header { align-items: flex-start; flex-direction: column; gap: 10px; } .brand { font-size: 1.7rem; } .intro { padding: 54px 0 40px; } section { padding: 40px 0; } h2 { font-size: 1.5rem; } .insights { grid-template-columns: 1fr; } .insights > div { padding: 26px; } .note { padding: 22px; } .subtitle br, .definition br { display: none; } nav ol { gap: 0 20px; font-size: .875rem; } #problem .definition { padding-left: 20px; } }
+    @media print { :root { --bg: white; --text: #111; --muted: #444; --accent: #b20710; --line: #ccc; } body { background: white; } .container { width: 100%; } nav, .skip { display: none; } .intro { padding: 30px 0; } section { padding: 30px 0; break-inside: avoid; } .note, .insights > div, .questions li { background: #eee; } .note p, .definition, .subtitle { color: #111; } }
+
+    
+    #flow .questions li { display: block; }
+    #flow .questions li::before { margin: 0 0 22px; }
+    #flow .questions strong { display: block; font-size: 1.2rem; line-height: 1.6; margin-bottom: 14px; }
+    #flow .questions p { font-size: 1rem; }
+    .decision-summary { border-left: 4px solid #e50914; padding-left: 24px; margin-bottom: 28px; }
+    .decision-summary p { color: white; font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 700; }
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+  <header class="container"><a class="brand" href="index.html" aria-label="CineVerse 홈">CINEVERSE</a><p>프로젝트 포트폴리오 · 제품 판단과 대화 경험</p></header>
+  <main id="main" class="container">
+    <div class="intro">
+      <p class="eyebrow">04 · CineVerse</p>
+      <h1>AI 영화 추천 서비스</h1>
+      <p class="subtitle">무엇을 볼지 헤매는 시간에서,<br>보고 싶은 한 편을 고르는 경험으로</p>
+    </div>
+    <nav aria-label="페이지 목차"><ol>
+      <li><a href="#hypothesis">제품 가설</a></li>
+      <li><a href="#decision">추천 방식에 대한 판단</a></li>
+      <li><a href="#flow">대화형 추천의 기본 흐름</a></li>
+      <li><a href="#policy">후속 대화 정책</a></li>
+    </ol></nav>
+    <section id="hypothesis" aria-labelledby="hypothesis-title">
+      <h2 id="hypothesis-title"><span>01 · PRODUCT HYPOTHESIS</span>제품 가설</h2>
+      <p>콘텐츠 선택 피로가 높은 사용자에게 빠른 첫 응답을 제공하고, 이후 대화에서 조건을 좁히면 기다림과 비교 부담을 줄일 수 있다고 가정했습니다.</p>
+      <div class="insights"><div><h3>빠른 대화 시작</h3><p>첫 응답부터 모든 취향을 파악하기보다 사용자가 기다리지 않고 탐색을 시작하도록 합니다.</p></div><div><h3>대화로 점진적 개인화</h3><p>현재 감정과 선호 조건을 확인하며 후보를 조정하고, 구독 OTT와 시청 이력을 반영하는 방향으로 개인화를 확장합니다.</p></div></div>
+    </section>
+    <section id="decision" aria-labelledby="decision-title">
+      <h2 id="decision-title"><span>02 · TRADE-OFF</span>추천 방식에 대한 판단</h2>
+      <div class="decision-summary"><p>탐색 속도를 먼저 개선하고, 대화로 개인화를 이어갑니다.</p></div>
+      <p>기존의 추천 방식을 사용하면서 대화형 추천도 함께 사용할 수 있도록 설계했습니다.</p>
+      <p>첫 응답부터 완벽한 개인화를 제공하기보다, 응답 속도를 우선하고 대화가 이어질수록 추천을 정교하게 만드는 방식을 선택했습니다. 개인화 질문이 늘어나면 콘텐츠 선택 시간도 길어질 수 있기 때문입니다.</p>
+      <p>추천 정확도 고도화의 우선순위를 낮추고 탐색 속도 개선에 먼저 집중했습니다. 다만 사용자가 볼 수 있는 OTT 작품이라는 조건은 중요하게 다뤘습니다.</p>
+      
+    </section>
+    <section id="flow" aria-labelledby="flow-title">
+      <h2 id="flow-title"><span>03 · CONVERSATION FLOW</span>대화형 추천의 기본 흐름</h2>
+      <p>캐릭터와의 대화 자체를 탐색 경험으로 구성했습니다. 50개 캐릭터의 성격과 말투를 반영한 AI와 1~5명의 캐릭터가 참여하는 멀티턴 대화 구조를 구성했습니다.</p>
+      <ol class="questions"><li><strong>감정과 조건 입력</strong><p>사용자가 기분이나 원하는 영화를 이야기합니다. 30가지 이상의 감정과 장르·배우·감독·연도·관객수 조건을 탐색에 활용합니다.</p></li><li><strong>후보 추천과 조건 조정</strong><p>AI가 후보를 제시하고 후속 대화에서 사용자의 반응과 조건을 반영해 추천 범위를 좁힙니다.</p></li><li><strong>영화 확인과 선택</strong><p>후보를 확인하며 선택을 이어갑니다. 이미 본 작품과 구독하지 않은 OTT의 작품을 제외하는 개인화 구조를 후속 개선 과제로 삼았습니다.</p></li></ol>
+    </section>
+    <section id="policy" aria-labelledby="policy-title">
+      <h2 id="policy-title"><span>04 · FOLLOW-UP POLICY</span>후속 대화 정책</h2>
+      <p>대화가 길어질수록 개인화가 정교해질 수 있지만, 선택까지 걸리는 시간도 늘어날 수 있습니다. 추가 질문은 후보를 좁히는 데 필요한 정보에 집중하고 응답 속도와 탐색 부담을 함께 고려합니다.</p>
+      <p>프로젝트를 돌아보며 한 번의 대화뿐 아니라 시청 이력·취향·구독 OTT를 기억하는 추천 구조가 필요하다고 판단했습니다. 이 구조는 후속 개선 방향으로 구분합니다.</p>
+    </section>
+  </main>
+  <footer class="container"><a href="research.html">문제 발견과 사용자 조사 보기</a><br><a href="implementation-validation.html">04 · 구현과 기술 검증 보기</a><br><a href="behavior-experiments.html">04 · 행동 지표와 다음 실험 보기</a></footer>
+</body>
+</html>

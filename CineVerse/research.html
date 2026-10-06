@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI 캐릭터와 대화하며 영화를 추천받는 CineVerse 프로젝트의 문제 발견과 사용자 조사 과정.">
+  <title>CineVerse — 프로젝트 포트폴리오</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23252b36'/%3E%3Cpath d='M22 9a9 9 0 1 0 0 14' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: dark; --bg: #141414; --panel: #222; --text: #fff; --muted: #bcbcbc; --accent: #e50914; --line: #333; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.85 "Malgun Gothic", sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: #ff5058; }
+    a:focus-visible { outline: 2px solid white; outline-offset: 6px; }
+    .skip { position: absolute; top: -100px; left: 24px; padding: 8px 16px; background: #222; z-index: 2; }
+    .skip:focus { top: 12px; }
+    .container { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+    header { padding: 26px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid #292929; }
+    .brand { color: var(--accent); font-family: Arial, sans-serif; font-size: 2rem; font-weight: 900; letter-spacing: -.06em; line-height: 1.2; }
+    header p { margin: 0; color: var(--muted); font-size: .875rem; }
+    .intro { padding: 90px 0 72px; max-width: 940px; }
+    .eyebrow { color: #ccc; margin: 0 0 24px; font-size: .875rem; font-weight: 700; letter-spacing: .14em; display: flex; align-items: center; gap: 12px; }
+    .eyebrow::before { content: ""; display: inline-block; width: 4px; height: 20px; background: var(--accent); }
+    h1 { font-size: clamp(2.4rem, 5.6vw, 4.7rem); line-height: 1.18; letter-spacing: -.055em; margin: 0; font-weight: 900; }
+    .subtitle { font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.7; margin: 30px 0 0; color: #d2d2d2; }
+    nav { border-bottom: 1px solid var(--line); }
+    nav ol { display: flex; flex-wrap: wrap; gap: 0 32px; list-style: none; margin: 0; padding: 0; font-size: .95rem; color: #bcbcbc; }
+    nav a { display: block; padding: 16px 0; border-bottom: 3px solid transparent; }
+    nav a:hover, nav a:focus-visible { color: white; border-bottom-color: var(--accent); }
+    section { padding: 60px 0; border-bottom: 1px solid #2b2b2b; scroll-margin-top: 24px; }
+    section > p { max-width: 900px; }
+    h2 { font-size: 1.8rem; line-height: 1.5; margin: 0 0 28px; letter-spacing: -.03em; }
+    h2 span { display: block; margin-bottom: 10px; color: #aaa; font-size: .875rem; font-weight: 600; letter-spacing: .08em; }
+    h3 { margin: 0 0 14px; font-size: 1.2rem; line-height: 1.6; }
+    p { margin: 0 0 22px; color: var(--muted); }
+    p:last-child { margin-bottom: 0; }
+    .note { max-width: 900px; background: #202020; border-left: 4px solid var(--accent); padding: 26px 30px; margin-top: 26px; }
+    .note h3 { color: #ff626a; font-size: .9rem; }
+    .note p { color: #efefef; }
+    .questions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; list-style: none; padding: 0; margin: 28px 0; counter-reset: question; }
+    .questions li { counter-increment: question; background: #222; padding: 26px; border-radius: 4px; border-top: 3px solid #454545; }
+    .questions li::before { content: "0" counter(question); display: block; color: #ff4d58; font: 700 2.4rem/1.2 Arial, sans-serif; margin-bottom: 28px; }
+    .insights { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; margin: 28px 0; counter-reset: insight; }
+    .insights > div { counter-increment: insight; background: #242424; padding: 32px; border-radius: 4px; border-top: 4px solid var(--accent); }
+    .insights > div::before { content: "0" counter(insight); display: block; color: #a3a3a3; font: 700 3rem/1 Arial, sans-serif; margin-bottom: 26px; }
+    .insights h3 { font-size: 1.4rem; }
+    .insights p { max-width: 460px; }
+    .definition { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.6; color: white; letter-spacing: -.035em; }
+    #problem { border-bottom: none; padding: 64px 0 80px; }
+    #problem .definition { border-left: 5px solid var(--accent); padding-left: 28px; max-width: 100%; margin-bottom: 28px; }
+    footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: #aaa; font-size: .875rem; line-height: 2.5; }
+    @media (max-width: 850px) { .questions { grid-template-columns: 1fr; } .questions li { display: flex; align-items: center; gap: 24px; } .questions li::before { margin: 0; font-size: 1.8rem; } }
+    @media (max-width: 600px) { .container { width: calc(100% - 40px); } header { align-items: flex-start; flex-direction: column; gap: 10px; } .brand { font-size: 1.7rem; } .intro { padding: 54px 0 40px; } section { padding: 40px 0; } h2 { font-size: 1.5rem; } .insights { grid-template-columns: 1fr; } .insights > div { padding: 26px; } .note { padding: 22px; } .subtitle br, .definition br { display: none; } nav ol { gap: 0 20px; font-size: .875rem; } #problem .definition { padding-left: 20px; } }
+    @media print { :root { --bg: white; --text: #111; --muted: #444; --accent: #b20710; --line: #ccc; } body { background: white; } .container { width: 100%; } nav, .skip { display: none; } .intro { padding: 30px 0; } section { padding: 30px 0; break-inside: avoid; } .note, .insights > div, .questions li { background: #eee; } .note p, .definition, .subtitle { color: #111; } }
+
+    .abandon-route { margin: 24px 0; padding: 18px 24px; background: #202020; border-radius: 6px; }
+    .abandon-route figcaption { margin-bottom: 26px; color: #eee; font-weight: 700; }
+    .route-track { display: flex; align-items: center; gap: 16px; }
+    .route-step { flex: 1; min-width: 0; text-align: center; }
+    .route-number { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin: 0 auto 8px; border-radius: 50%; background: #422126; color: #ff7179; font: 700 1rem/1 Arial, sans-serif; }
+    .route-step:first-child > .route-number, .route-end .route-number { background: #e50914; color: white; }
+    .route-label { display: block; font-size: .875rem; color: #ddd; line-height: 1.6; }
+    .route-arrow { color: #888; font-size: 1.4rem; flex: 0 0 auto; }
+    .route-loop { flex: 2.5; padding: 12px 16px 8px; border: 1px dashed #b63b43; border-radius: 8px; }
+    .route-loop-steps { display: flex; align-items: center; gap: 12px; }
+    .route-loop .route-step:first-child > .route-number { background: #422126; color: #ff7179; }
+    .route-repeat { margin-top: 8px; padding-top: 5px; border-top: 1px solid #563035; text-align: center; color: #ff858b; font-size: .875rem; }
+    @media (max-width: 850px) { .route-track { flex-direction: column; } .route-track > .route-arrow { transform: rotate(90deg); } .route-loop { width: 100%; max-width: 420px; } .route-step { width: 100%; } .abandon-route { padding: 16px 18px; } }
+
+    .interview-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; width: 100%; margin: 28px 0; padding: 0; border: 0; background: transparent; color: white; font: inherit; text-align: left; cursor: pointer; }
+    .interview-card { display: flex; flex-direction: column; gap: 24px; padding: 26px; background: #222; border-top: 3px solid #454545; border-radius: 4px; word-break: keep-all; }
+    .interview-group:hover .interview-card { background: #292929; }
+    .interview-group[aria-expanded="true"] .interview-card { border-top-color: #e50914; }
+    .interview-group:focus-visible { outline: 2px solid white; outline-offset: 6px; }
+    .question-number { color: #ff4d58; font: 700 2.4rem/1.2 Arial, sans-serif; }
+    .interview-answers { margin: 0 0 28px; padding: 28px 30px; background: #202020; border-left: 4px solid #e50914; }
+    .interview-answers[hidden] { display: none; }
+    .interview-person { color: #aaa; font-size: .875rem; }
+    .interview-answers blockquote { margin: 20px 0 0; }
+    .interview-answers blockquote p { color: #eee; }
+    @media (max-width: 850px) { .interview-group { grid-template-columns: 1fr; } .interview-card { flex-direction: row; align-items: center; } .question-number { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+  <header class="container"><a class="brand" href="index.html" aria-label="CineVerse 홈">CINEVERSE</a><p>프로젝트 포트폴리오 · 문제 발견과 사용자 조사</p></header>
+  <main id="main" class="container">
+    <div class="intro">
+      <p class="eyebrow">CineVerse · UX CASE STUDY</p>
+      <h1>AI 영화 추천 서비스</h1>
+      <p class="subtitle">무엇을 볼지 헤매는 시간에서,<br>보고 싶은 한 편을 고르는 경험으로</p>
+    </div>
+    <nav aria-label="포트폴리오 목차">
+      <ol>
+        <li><a href="#overview">프로젝트 소개</a></li>
+        <li><a href="#discovery">문제의 출발점</a></li>
+        <li><a href="#research">사용자 조사</a></li>
+        <li><a href="#insights">핵심 인사이트</a></li>
+        <li><a href="#problem">문제 정의</a></li>
+      </ol>
+    </nav>
+    <section id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title"><span>01 · OVERVIEW</span>프로젝트 소개</h2>
+      <p>CineVerse는 영화 캐릭터 및 AI 캐릭터와 대화하며 감정과 취향에 맞는 영화를 추천받는 서비스입니다. 사용자가 오늘의 기분이나 원하는 조건을 말하면 대화를 통해 후보를 좁혀갑니다.</p>
+      <p>2026년 6월부터 8월까지 진행한 4인 팀 프로젝트에서 PM 리드와 프론트엔드·디자인 역할을 맡았습니다. 모델의 추천 품질뿐 아니라 응답 속도와 영화 선택 과정의 부담을 함께 살폈습니다.</p>
+    </section>
+    <section id="discovery" aria-labelledby="discovery-title">
+      <h2 id="discovery-title"><span>02 · DISCOVERY</span>문제의 출발점</h2>
+      <p>OTT에서 무엇을 볼지 고르다가 검색과 비교만 반복하고 시청을 포기하는 경험에서 출발했습니다. 콘텐츠가 충분한데도 선택이 어려운 이유를 알아보고자 했습니다.</p>
+      <figure class="abandon-route" aria-label="TV 전원 켜기, OTT 켜기, 무슨 영화를 볼지 고민과 휴대폰으로 영화 검색을 반복한 뒤 선택 포기">
+        <div class="route-track" aria-hidden="true">
+          <div class="route-step"><span class="route-number">01</span><span class="route-label">TV 전원 켜기</span></div>
+          <span class="route-arrow">→</span>
+          <div class="route-step"><span class="route-number">02</span><span class="route-label">OTT 켜기</span></div>
+          <span class="route-arrow">→</span>
+          <div class="route-loop">
+            <div class="route-loop-steps">
+              <div class="route-step"><span class="route-number">03</span><span class="route-label">무슨 영화를<br>볼지 고민</span></div>
+              <span class="route-arrow">→</span>
+              <div class="route-step"><span class="route-number">04</span><span class="route-label">휴대폰으로<br>영화 검색</span></div>
+            </div>
+            <div class="route-repeat">↶ 고민과 검색 반복</div>
+          </div>
+          <span class="route-arrow">→</span>
+          <div class="route-step route-end"><span class="route-number">05</span><span class="route-label">선택 포기</span></div>
+        </div>
+      </figure>
+      <p>영화를 보고 싶어도 정보가 많고 여러 곳에 흩어져 있으면 검색과 비교 자체가 피로해집니다. 기존 추천이 현재의 취향과 기분, 함께 보는 사람 같은 맥락을 충분히 반영하지 못한다는 점에 주목했습니다.</p>
+      <div class="note">
+        <h3>초기 가설</h3>
+        <p style="font-size: calc(1rem + 2pt)">사용자의 상황에 맞춰 후보를 좁히고 탐색 시간을 줄이면, 영화 선택을 도울 수 있다고 가정했습니다.</p>
+      </div>
+      <p style="margin-top:24px">다른 사용자도 선택 피로를 겪는지, 추천 과정에서 속도와 개인화 중 무엇을 우선하는지 인터뷰로 확인했습니다.</p>
+    </section>
+    <section id="research" aria-labelledby="research-title">
+      <h2 id="research-title"><span>03 · USER RESEARCH</span>사용자 조사 · 인터뷰</h2>
+      <p>콘텐츠 선택 과정과 추천 서비스 사용 경험을 조사했습니다. 심층 인터뷰는 12명을 대상으로 1인당 30분씩 진행했고, 프로젝트 요약에는 사용자 인터뷰 20건을 기록했습니다.</p>
+      <button type="button" class="interview-group" aria-expanded="false" aria-controls="interview-answers" aria-label="인터뷰 질문 세 가지와 답변 펼치기">
+        <span class="interview-card"><span class="question-number">01</span><span>영화를 선택하기 어려워지는 순간</span></span>
+        <span class="interview-card"><span class="question-number">02</span><span>추천을 받아도 영화를 보지 않는 이유</span></span>
+        <span class="interview-card"><span class="question-number">03</span><span>빠른 응답과 개인화된 추천 중 우선하는 조건</span></span>
+      </button>
+      <div id="interview-answers" class="interview-answers" role="region" aria-label="사용자 인터뷰 답변" hidden>
+        <p class="interview-person">P-08 · 30대 중반 · 직장인</p>
+        <blockquote><p><strong>A : “저는 속도요. 여기서 오래 기다릴 거면 그냥 다른 OTT 켜볼 것 같아요. 대신 제가 볼 수 있는 OTT 작품이라는 조건은 꼭 맞아야 해요.”</strong></p></blockquote>
+        <blockquote><p><strong>A: “콘텐츠가 없는 게 아니라 너무 많이 비교해야 해서 피곤하다.”</strong></p></blockquote>
+      </div>
+      <p style="font-size: .875rem; color: #aaa; margin-top: -12px; max-width: none; text-align: right;">사용자 인터뷰 20건 · 심층 인터뷰 12명, 30분/인</p>
+      <div class="note"><h3>조사에서 확인한 문제</h3><p>선택 피로는 콘텐츠 정보의 부족보다 반복되는 검색·비교와 현재 상황에 맞지 않는 추천에서 생겼습니다.</p></div>
+    </section>
+    <section id="insights" aria-labelledby="insights-title">
+      <h2 id="insights-title"><span>04 · KEY INSIGHTS</span>핵심 인사이트</h2>
+      <p>사용자의 두 가지 요구</p>
+      <div class="insights">
+        <div><h3>오래 기다리지 않고 추천받기</h3><p>추천을 기다리는 시간이 길면 다른 OTT로 이동할 수 있습니다. 첫 응답을 빠르게 제공해 탐색을 시작하는 부담을 줄일 필요가 있었습니다.</p></div>
+        <div><h3>지금 볼 수 있는 작품으로 좁히기</h3><p>기분과 취향에 맞는 후보뿐 아니라 구독 중인 OTT와 시청 이력을 반영해야 했습니다. 이미 본 작품이나 볼 수 없는 작품은 추천 만족도를 낮췄습니다.</p></div>
+      </div>
+      <p>이를 바탕으로 OTT 이용자 전체보다, 특정 OTT 내의 콘텐츠를 자주 소비하지만 무엇을 볼지 결정하는 데 피로를 느끼는 20~30대 사용자를 핵심 대상으로 정했습니다.</p>
+    </section>
+    <section id="problem" aria-labelledby="problem-title">
+      <h2 id="problem-title"><span>05 · PROBLEM DEFINITION</span>문제 정의</h2>
+      <p class="definition">첫 응답은 빠르게,<br>추천은 대화할수록 정교하게.</p>
+      <p>사용자가 검색과 비교를 반복하는 시간을 줄이고, 대화로 현재 상황에 맞는 한 편을 선택하도록 돕는 것을 제품의 문제로 정의했습니다. 추천 정확도와 함께 응답 속도, 탐색 과정의 이탈을 판단 기준으로 삼았습니다.</p>
+    </section>
+  </main>
+  <footer class="container">CineVerse · 프로젝트 포트폴리오<br><a href="product-conversation.html">04 · 제품 판단과 대화 경험 보기</a><br><a href="implementation-validation.html">04 · 구현과 기술 검증 보기</a><br><a href="behavior-experiments.html">04 · 행동 지표와 다음 실험 보기</a></footer>
+  <script>
+    const interviewGroup = document.querySelector('.interview-group');
+    const interviewAnswers = document.getElementById('interview-answers');
+    interviewGroup.addEventListener('click', () => {
+      const open = interviewGroup.getAttribute('aria-expanded') !== 'true';
+      interviewGroup.setAttribute('aria-expanded', String(open));
+      interviewGroup.setAttribute('aria-label', open ? '인터뷰 질문 세 가지와 답변 접기' : '인터뷰 질문 세 가지와 답변 펼치기');
+      interviewAnswers.hidden = !open;
+    });
+  </script>
+</body>
+</html>

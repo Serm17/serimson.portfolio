@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>새 프로젝트 — 문제 발견과 사용자 조사</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23252b36'/%3E%3Cpath d='M22 9a9 9 0 1 0 0 14' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: dark; --bg: #141414; --panel: #222; --text: #fff; --muted: #bcbcbc; --accent: #e50914; --line: #333; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.85 "Malgun Gothic", sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: #ff5058; }
+    a:focus-visible { outline: 2px solid white; outline-offset: 6px; }
+    .skip { position: absolute; top: -100px; left: 24px; padding: 8px 16px; background: #222; z-index: 2; }
+    .skip:focus { top: 12px; }
+    .container { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+    header { padding: 26px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid #292929; }
+    .brand { color: var(--accent); font-family: Arial, sans-serif; font-size: 2rem; font-weight: 900; letter-spacing: -.06em; line-height: 1.2; }
+    header p { margin: 0; color: var(--muted); font-size: .875rem; }
+    .intro { padding: 90px 0 72px; max-width: 940px; }
+    .eyebrow { color: #ccc; margin: 0 0 24px; font-size: .875rem; font-weight: 700; letter-spacing: .14em; display: flex; align-items: center; gap: 12px; }
+    .eyebrow::before { content: ""; display: inline-block; width: 4px; height: 20px; background: var(--accent); }
+    h1 { font-size: clamp(2.4rem, 5.6vw, 4.7rem); line-height: 1.18; letter-spacing: -.055em; margin: 0; font-weight: 900; }
+    .subtitle { font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.7; margin: 30px 0 0; color: #d2d2d2; }
+    nav { border-bottom: 1px solid var(--line); }
+    nav ol { display: flex; flex-wrap: wrap; gap: 0 32px; list-style: none; margin: 0; padding: 0; font-size: .95rem; color: #bcbcbc; }
+    nav a { display: block; padding: 16px 0; border-bottom: 3px solid transparent; }
+    nav a:hover, nav a:focus-visible { color: white; border-bottom-color: var(--accent); }
+    section { padding: 60px 0; border-bottom: 1px solid #2b2b2b; scroll-margin-top: 24px; }
+    section > p { max-width: 900px; }
+    h2 { font-size: 1.8rem; line-height: 1.5; margin: 0 0 28px; letter-spacing: -.03em; }
+    h2 span { display: block; margin-bottom: 10px; color: #aaa; font-size: .875rem; font-weight: 600; letter-spacing: .08em; }
+    h3 { margin: 0 0 14px; font-size: 1.2rem; line-height: 1.6; }
+    p { margin: 0 0 22px; color: var(--muted); }
+    p:last-child { margin-bottom: 0; }
+    .note { max-width: 900px; background: #202020; border-left: 4px solid var(--accent); padding: 26px 30px; margin-top: 26px; }
+    .note h3 { color: #ff626a; font-size: .9rem; }
+    .note p { color: #efefef; }
+    .questions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; list-style: none; padding: 0; margin: 28px 0; counter-reset: question; }
+    .questions li { counter-increment: question; background: #222; padding: 26px; border-radius: 4px; border-top: 3px solid #454545; }
+    .questions li::before { content: "0" counter(question); display: block; color: #ff4d58; font: 700 2.4rem/1.2 Arial, sans-serif; margin-bottom: 28px; }
+    .insights { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; margin: 28px 0; counter-reset: insight; }
+    .insights > div { counter-increment: insight; background: #242424; padding: 32px; border-radius: 4px; border-top: 4px solid var(--accent); }
+    .insights > div::before { content: "0" counter(insight); display: block; color: #a3a3a3; font: 700 3rem/1 Arial, sans-serif; margin-bottom: 26px; }
+    .insights h3 { font-size: 1.4rem; }
+    .insights p { max-width: 460px; }
+    .definition { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.6; color: white; letter-spacing: -.035em; }
+    #problem { border-bottom: none; padding: 64px 0 80px; }
+    #problem .definition { border-left: 5px solid var(--accent); padding-left: 28px; max-width: 100%; margin-bottom: 28px; }
+    footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: #aaa; font-size: .875rem; line-height: 2.5; }
+    @media (max-width: 850px) { .questions { grid-template-columns: 1fr; } .questions li { display: flex; align-items: center; gap: 24px; } .questions li::before { margin: 0; font-size: 1.8rem; } }
+    @media (max-width: 600px) { .container { width: calc(100% - 40px); } header { align-items: flex-start; flex-direction: column; gap: 10px; } .brand { font-size: 1.7rem; } .intro { padding: 54px 0 40px; } section { padding: 40px 0; } h2 { font-size: 1.5rem; } .insights { grid-template-columns: 1fr; } .insights > div { padding: 26px; } .note { padding: 22px; } .subtitle br, .definition br { display: none; } nav ol { gap: 0 20px; font-size: .875rem; } #problem .definition { padding-left: 20px; } }
+    @media print { :root { --bg: white; --text: #111; --muted: #444; --accent: #b20710; --line: #ccc; } body { background: white; } .container { width: 100%; } nav, .skip { display: none; } .intro { padding: 30px 0; } section { padding: 30px 0; break-inside: avoid; } .note, .insights > div, .questions li { background: #eee; } .note p, .definition, .subtitle { color: #111; } }
+
+    .abandon-route { margin: 24px 0; padding: 18px 24px; background: #202020; border-radius: 6px; }
+    .abandon-route figcaption { margin-bottom: 26px; color: #eee; font-weight: 700; }
+    .route-track { display: flex; align-items: center; gap: 16px; }
+    .route-step { flex: 1; min-width: 0; text-align: center; }
+    .route-number { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin: 0 auto 8px; border-radius: 50%; background: #422126; color: #ff7179; font: 700 1rem/1 Arial, sans-serif; }
+    .route-step:first-child > .route-number, .route-end .route-number { background: #e50914; color: white; }
+    .route-label { display: block; font-size: .875rem; color: #ddd; line-height: 1.6; }
+    .route-arrow { color: #888; font-size: 1.4rem; flex: 0 0 auto; }
+    .route-loop { flex: 2.5; padding: 12px 16px 8px; border: 1px dashed #b63b43; border-radius: 8px; }
+    .route-loop-steps { display: flex; align-items: center; gap: 12px; }
+    .route-loop .route-step:first-child > .route-number { background: #422126; color: #ff7179; }
+    .route-repeat { margin-top: 8px; padding-top: 5px; border-top: 1px solid #563035; text-align: center; color: #ff858b; font-size: .875rem; }
+    @media (max-width: 850px) { .route-track { flex-direction: column; } .route-track > .route-arrow { transform: rotate(90deg); } .route-loop { width: 100%; max-width: 420px; } .route-step { width: 100%; } .abandon-route { padding: 16px 18px; } }
+
+    .interview-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; width: 100%; margin: 28px 0; padding: 0; border: 0; background: transparent; color: white; font: inherit; text-align: left; cursor: pointer; }
+    .interview-card { display: flex; flex-direction: column; gap: 24px; padding: 26px; background: #222; border-top: 3px solid #454545; border-radius: 4px; word-break: keep-all; }
+    .interview-group:hover .interview-card { background: #292929; }
+    .interview-group[aria-expanded="true"] .interview-card { border-top-color: #e50914; }
+    .interview-group:focus-visible { outline: 2px solid white; outline-offset: 6px; }
+    .question-number { color: #ff4d58; font: 700 2.4rem/1.2 Arial, sans-serif; }
+    .interview-answers { margin: 0 0 28px; padding: 28px 30px; background: #202020; border-left: 4px solid #e50914; }
+    .interview-answers[hidden] { display: none; }
+    .interview-person { color: #aaa; font-size: .875rem; }
+    .interview-answers blockquote { margin: 20px 0 0; }
+    .interview-answers blockquote p { color: #eee; }
+    @media (max-width: 850px) { .interview-group { grid-template-columns: 1fr; } .interview-card { flex-direction: row; align-items: center; } .question-number { font-size: 1.8rem; } }
+  
+/* 새 프로젝트의 밝은 테마 */
+:root{color-scheme:light;--bg:#fff;--panel:#f5f5f5;--text:#000;--muted:#000;--accent:#000;--line:#ddd}
+body{background:#fff;color:#000}
+header{border-bottom-color:#ddd}
+header p,.eyebrow,.subtitle,nav ol,h2 span,p,footer{color:#000}
+nav a:hover,nav a:focus-visible,a:hover{color:#000}
+section{border-bottom-color:#ddd}
+a:focus-visible{outline-color:#000}
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+  <header class="container"><p>프로젝트 포트폴리오 · 문제 발견과 사용자 조사</p></header>
+  <main id="main" class="container">
+    <div class="intro">
+      <!-- 프로젝트 제목과 소개 문구 -->
+      <h1></h1>
+      <p class="subtitle"></p>
+    </div>
+    <nav aria-label="포트폴리오 목차">
+      <ol>
+        <li><a href="#overview">프로젝트 소개</a></li>
+        <li><a href="#discovery">문제의 출발점</a></li>
+        <li><a href="#insights">가설</a></li>
+        <li><a href="#problem">문제 정의</a></li>
+      </ol>
+    </nav>
+    <section id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title"><span>01 · OVERVIEW</span>프로젝트 소개</h2>
+      <p>사용자 맞춤형 AI 서비스를 위해 필요한 <strong>Memory 정책과 Retrieval 기준을 설계하는 프로젝트</strong>입니다.</p>
+      <p>사용자와의 대화에서 어떤 정보를 기억해야 하는지, 과거 기억과 최근 정보가 충돌할 때 무엇을 우선해야 하는지, 그리고 외부 검색이나 RAG 없이 저장된 사용자 맥락만으로 얼마나 자연스럽고 일관된 대화가 가능한지를 실험합니다.</p>
+      <p>이를 통해 <strong>기억의 저장·조회·갱신·삭제 기준과 RAG 사용 조건을 정의하고, 실제 대화 품질에 어떤 영향을 주는지 검증</strong>합니다.</p>
+    </section>
+    <section id="discovery" aria-labelledby="discovery-title">
+      <h2 id="discovery-title"><span>02 · DISCOVERY</span>문제의 출발점</h2>
+      <p>CineVerse에서 사용자 맞춤 추천을 제공하려면, 사용자의 취향과 이전 대화 맥락을 기억하는 기능이 필요했습니다.</p>
+      <p>하지만 모든 대화를 그대로 기억하는 방식은 비효율적이고, 오래된 기억이 최근 정보와 충돌할 경우 어떤 정보를 우선해야 하는지도 명확한 기준이 필요했습니다.</p>
+      <p>또한 캐릭터와의 대화에서 외부 검색이나 RAG에 의존하지 않고, 저장된 사용자 맥락만으로 얼마나 자연스럽고 일관된 질의응답이 가능한지도 확인하고 싶었습니다.</p>
+      <p>그래서 이번 프로젝트에서는 <strong>무엇을 기억할지, 언제 기억을 갱신하거나 버릴지, 그리고 언제 RAG를 사용해야 하는지에 대한 AI Memory 정책을 설계하고 검증</strong>하고자 했습니다.</p>
+    </section>
+    <section id="insights" aria-labelledby="insights-title">
+      <h2 id="insights-title"><span>03 · HYPOTHESIS</span>가설</h2>
+      <p>사용자 맞춤형 AI에서는 많은 정보를 기억하는 것보다, <strong>현재 대화에 필요한 기억을 정확하게 사용하는 것이 더 중요하다</strong>고 판단했습니다.</p>
+      <p>또한 사용자 정보는 시간이 지나며 바뀔 수 있기 때문에, 과거 기억을 그대로 유지하는 방식만으로는 자연스러운 개인화가 어렵습니다.<br>따라서 <strong>기억의 저장·갱신·충돌 처리 기준과, Memory만으로 답할지 RAG를 사용할지에 대한 정책이 필요합니다.</strong></p>
+    </section>
+    <section id="problem" aria-labelledby="problem-title">
+      <h2 id="problem-title"><span>04 · PROBLEM DEFINITION</span>문제 정의</h2>
+      <!-- 본문 내용 입력 -->
+    </section>
+  </main>
+  <footer class="container">프로젝트 포트폴리오</footer>
+  
+</body>
+</html>
